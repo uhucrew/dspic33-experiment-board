@@ -1,5 +1,5 @@
 # dspic33-experiment-board
-software to run a homebrew dspic33e board to process audio data at high sampling rates
+software to run a homebrew dsPIC33E board to process audio data at high sampling rates
 
 More information, schematics and description in English and German here:
 
