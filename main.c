@@ -50,6 +50,7 @@
 
 #include "init.h"
 #include "sine.h"
+#include "fft.h"
 #include "delay.h"
 #include "timer_x.h"
 #include "i2c_x.h"
@@ -62,8 +63,8 @@
 
 
 
-//working tasks timer interrupt
-void __attribute__((__interrupt__, no_auto_psv)) _T3Interrupt(void)
+//working tasks timer interrupt, save psv and working registers
+void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void)
 {
     static uint16_t i;
     static uint16_t da_ptr = 0;
@@ -72,6 +73,8 @@ void __attribute__((__interrupt__, no_auto_psv)) _T3Interrupt(void)
     //convert samplerate and 16 bit input to 32(24) bit output
     //sum up volume to be displayed in main loop
     if (spi_ad_buffer_full[0]) {
+        //use half buffer size as number of points (for stereo)
+        apply_window(SPI_AD_BUFFER_SIZE>>1, window_fn_buffer, spi_ad_buffer_0, spi_ad_buffer_0);
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -84,6 +87,8 @@ void __attribute__((__interrupt__, no_auto_psv)) _T3Interrupt(void)
         spi_ad_buffer_full[0] = false;
     }
     if (spi_ad_buffer_full[1]) {
+        //use half buffer size as number of points (for stereo)
+        apply_window(SPI_AD_BUFFER_SIZE>>1, window_fn_buffer, spi_ad_buffer_1, spi_ad_buffer_1);
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -119,6 +124,9 @@ int main(int argc, char** argv) {
     QEI_init();
     //initialize dds variables
     set_dds_step(48, 55.0, 880.0);
+
+    setup_window_fn_buffer(rectangle_window);
+
     //start AD/DA converter and read/send data continuously
     SPI1_init();
     SPI2_init();
@@ -134,10 +142,12 @@ int main(int argc, char** argv) {
     num_read = ee_read_bytes(I2C_ADDR_24LC256, 0, sizeof(i2c_buffer), i2c_buffer, false);
 */
 
-    uint8_t status = 1;
-    int32_t qei_diff, qei_last = 0, volume = 128;
-    bool menu_active = false;
-
+    static const char empty_line[] = "                                ";
+    static uint8_t status = 1;
+    static int32_t qei_diff, qei_last = 0, volume = 128, loop_count = 0;
+    static bool menu_active = false;
+    uint64_t last_running_time = running_time();
+    
     //main loop manage menu
     while (1)
     {
@@ -157,13 +167,23 @@ int main(int argc, char** argv) {
                 set_volume(I2C_ADDR_MAX5387, (uint8_t)volume);
                 fb_clear();
                 snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "VOLUME:  %ld", volume);
+                fb_draw_string (0, 0, empty_line);
                 fb_draw_string (0, 0, lcd_string_buffer);
             }
             else {
                 fb_clear();
                 snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "POS1CNT:  %ld", ((uint32_t)POS1CNTH<<16) + POS1CNTL);
+                fb_draw_string (0, 0, empty_line);
                 fb_draw_string (0, 0, lcd_string_buffer);
             }
+        }
+
+        if (++loop_count % 10 == 0) {
+            uint16_t ms_per_loop = (uint16_t)((running_time() - last_running_time) / 10);
+            last_running_time = running_time();
+            snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "ms/loop: %u", ms_per_loop);
+            fb_draw_string (0, 1, empty_line);
+            fb_draw_string (0, 1, lcd_string_buffer);
         }
         fb_show();
 

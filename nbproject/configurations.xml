@@ -19,6 +19,7 @@
       <itemPath>pps.h</itemPath>
       <itemPath>cni.h</itemPath>
       <itemPath>i2c_misc.h</itemPath>
+      <itemPath>fft.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -39,6 +40,13 @@
       <itemPath>qei_x.c</itemPath>
       <itemPath>cni.c</itemPath>
       <itemPath>iic_misc.c</itemPath>
+      <itemPath>blackman_harris_window.c</itemPath>
+      <itemPath>blackman_window.c</itemPath>
+      <itemPath>hamming_window.c</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/fft.S</itemPath>
+      <itemPath>rectangle_window.c</itemPath>
+      <itemPath>buffer.S</itemPath>
+      <itemPath>gauss_window.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -47,7 +55,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>SSD1306</Elem>
+    <Elem>/home/main/daten/ELEKTRO/bat-detector-2.0</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

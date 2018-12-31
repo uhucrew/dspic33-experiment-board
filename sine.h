@@ -17,7 +17,7 @@ extern "C" {
 #define SINE_TABLE_TYPE     uint32_t
 #define SINE_POINTS         4096
 
-__prog__ extern SINE_TABLE_TYPE sine_table[SINE_POINTS] __attribute__((space(prog)));
+__prog__ extern SINE_TABLE_TYPE sine_table[SINE_POINTS] __attribute__((space(auto_psv)));
 
 extern volatile uint16_t last_dds_step_r;
 extern volatile uint16_t last_dds_step_l;

@@ -14,26 +14,39 @@ extern "C" {
 
 #include <stdbool.h>
 
+
+//#define SPIBUF_IN_EDS
+
+
     
 //samplerate test frames
 #define     SR_TEST_FRAMES          10000
 #define     SPI_DA_SKIP_FIRST       2
 
+//size for both channels
 #define     SPI_DA_BUFFER_SIZE      2048
 
-#define     SPI_AD_BUFFER_SIZE      1024
+//size for both channels
+#define     SPI_AD_BUFFER_SIZE      2048
 
 #define     INPUT_SAMPLERATE        192
 #define     OUTPUT_SAMPLERATE       48
 #define     SAMPLERATE_RATIO        INPUT_SAMPLERATE / OUTPUT_SAMPLERATE
 
 
-extern uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
-extern uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
+#ifdef SPIBUF_IN_EDS
 __eds__ extern uint16_t spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(eds)));
 __eds__ extern uint16_t spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(eds)));
-extern volatile bool spi_da_buffer_empty[2];
+__eds__ extern uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(eds)));
+__eds__ extern uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(eds)));
+#else
+extern uint16_t spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
+extern uint16_t spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
+extern uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
+extern uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
+#endif
 extern volatile bool spi_ad_buffer_full[2];
+extern volatile bool spi_da_buffer_empty[2];
 
 
 void SPI1_init();

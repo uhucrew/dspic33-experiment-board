@@ -49,7 +49,7 @@ uint16_t (*rb13_cn_fn)() = empty_fn;
 //uint16_t (*rb15_cn_fn)() = empty_fn;
 
 
-void __attribute__((__interrupt__, no_auto_psv)) _CNInterrupt(void)
+void __attribute__((__interrupt__, auto_psv)) _CNInterrupt(void)
 {
     if (CNENA) {
         uint16_t porta_x = PORTA;

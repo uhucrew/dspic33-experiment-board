@@ -7,7 +7,7 @@
 
 
 //sine table 0..2*PI stored in program memory
-__prog__ SINE_TABLE_TYPE sine_table[SINE_POINTS] __attribute__((space(prog))) = {
+__prog__ SINE_TABLE_TYPE sine_table[SINE_POINTS] __attribute__((space(auto_psv))) = {
     0x00000000,	0x003243F5,	0x006487E3,	0x0096CBC1,	0x00C90F88,	0x00FB5330,	0x012D96B1,	0x015FDA03,
     0x01921D20,	0x01C45FFE,	0x01F6A297,	0x0228E4E2,	0x025B26D7,	0x028D6870,	0x02BFA9A4,	0x02F1EA6C,
     0x03242ABF,	0x03566A96,	0x0388A9EA,	0x03BAE8B2,	0x03ED26E6,	0x041F6480,	0x0451A177,	0x0483DDC3,

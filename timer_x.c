@@ -35,7 +35,7 @@ volatile uint16_t timer_m_rtc = 0;
 volatile uint16_t timer_h_rtc = 0;
 volatile uint16_t timer_d_rtc = 0;
 volatile uint32_t timer_ms = 0;
-void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
+void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
 {
     timer_ms++;
     if (++timer_ms_rtc == 1000) {
@@ -82,7 +82,7 @@ void timer2_init() {
 }
 
 volatile uint32_t timer_10us = 0;
-void __attribute__((__interrupt__, no_auto_psv)) _T2Interrupt(void)
+void __attribute__((__interrupt__, auto_psv)) _T2Interrupt(void)
 {
     if (timer_10us++ % 100 == 0) {
         PR2 = timer2_gap - 1;

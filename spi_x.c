@@ -12,8 +12,6 @@
 
 
 
-
-
 uint8_t samplerate = 0;
 uint8_t words_per_sample = 0;
 static uint16_t spi_da_dummy_read;
@@ -24,16 +22,31 @@ static uint16_t spi_ad_command = 0b1101000000000000;
 volatile static uint16_t frame_count = 0;
 volatile static uint64_t frames_end = 0;
 
-//buffer for D/A data
-uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
-uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
-volatile bool spi_da_buffer_empty[2] = { true, true };
-
+#ifdef SPIBUF_IN_EDS
 //buffer for A/D data in extended data space to save near memory
 __eds__ uint16_t spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(eds)));
 __eds__ uint16_t spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(eds)));
+//buffer for D/A data
+__eds__ uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(eds)));
+__eds__ uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(eds)));
+#else
+uint16_t spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE)));
+uint16_t spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE)));
+uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
+uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
+#endif
 volatile bool spi_ad_buffer_full[2] = { false, false };
+volatile bool spi_da_buffer_empty[2] = { true, true };
 
+
+#pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
+void SPI1_DMA0STA_set() {
+    DMA0STAL = (uint16_t) &spi_da_buffer_0;
+    DMA0STAH = 0;
+    DMA0STBL = (uint16_t) &spi_da_buffer_1;
+    DMA0STBH = 0;
+}
+#pragma GCC diagnostic warning "-Wpointer-to-int-cast"
 
 void SPI1_init() {
     //RA3 (RUN) output
@@ -82,11 +95,8 @@ void SPI1_init() {
     DMA0CNT = SPI_DA_BUFFER_SIZE - 1;
     //0b0000000000001010 = SPI1 – Transfer Done
     DMA0REQ = 0b0000000000001010;
-    DMA0STAL = (uint16_t) & spi_da_buffer_0;
-    DMA0STAH = 0;
-    DMA0STBL = (uint16_t) & spi_da_buffer_1;
-    DMA0STBH = 0;
-    DMA0PAD = (uint16_t) & SPI1BUF;
+    SPI1_DMA0STA_set();
+    DMA0PAD = (uint16_t) &SPI1BUF;
     _DMA0IP = 2;
     _DMA0IF = 0;
     _DMA0IE = 1;
@@ -99,11 +109,11 @@ void SPI1_init() {
     DMA1CNT = 0;
     //0b0000000000001010 = SPI1 – Transfer Done
     DMA1REQ = 0b0000000000001010;
-    DMA1STAL = (uint16_t) & spi_da_dummy_read;
+    DMA1STAL = (uint16_t) &spi_da_dummy_read;
     DMA1STAH = 0;
     DMA1STBL = 0;
     DMA1STBH = 0;
-    DMA1PAD = (uint16_t) & SPI1BUF;
+    DMA1PAD = (uint16_t) &SPI1BUF;
     _DMA1IP = 2;
     _DMA1IF = 0;
     _DMA1IE = 0;
@@ -116,25 +126,23 @@ void SPI1_init() {
     _LATA3 = 0;
 }
 
-void __attribute__((__interrupt__, no_auto_psv)) _DMA0Interrupt(void) {
+void __attribute__((__interrupt__, auto_psv)) _DMA0Interrupt(void) {
     if (_PPST0 == 1) {
         spi_da_buffer_empty[0] = true;
-        //fill_sine_buffer(spi_da_buffer_0, SPI_DA_BUFFER_SIZE);
     } else {
         spi_da_buffer_empty[1] = true;
-        //fill_sine_buffer(spi_da_buffer_1, SPI_DA_BUFFER_SIZE);
     }
 
     _DMA0IF = 0;
 }
 
-void __attribute__((__interrupt__, no_auto_psv)) _DMA1Interrupt(void) {
+void __attribute__((__interrupt__, auto_psv)) _DMA1Interrupt(void) {
     _DMA1IF = 0;
 }
 
 volatile static uint32_t spi1_errors = 0;
 
-void __attribute__((interrupt, no_auto_psv)) _SPI1ErrInterrupt(void) {
+void __attribute__((interrupt, auto_psv)) _SPI1ErrInterrupt(void) {
     spi1_errors++;
     if (SPI1STATbits.SPIROV == 1) {
         SPI1STATbits.SPIROV = 0;
@@ -144,6 +152,14 @@ void __attribute__((interrupt, no_auto_psv)) _SPI1ErrInterrupt(void) {
 }
 
 #pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
+void SPI2_DMA2STA_set() {
+    DMA2STAL = (uint16_t) &spi_ad_buffer_0;
+    DMA2STAH = 0;
+    DMA2STBL = (uint16_t) &spi_ad_buffer_1;
+    DMA2STBH = 0;
+}
+#pragma GCC diagnostic warning "-Wpointer-to-int-cast"
+
 void SPI2_init() {
     //stop SPI
     SPI2STATbits.SPIEN = 0;
@@ -204,11 +220,8 @@ void SPI2_init() {
     DMA2CNT = SPI_AD_BUFFER_SIZE - 1;
     //0b0000000000100001 = SPI2 - Transfer Done
     DMA2REQ = 0b0000000000100001;
-    DMA2STAL = (uint16_t)&spi_ad_buffer_0;
-    DMA2STAH = 0;
-    DMA2STBL = (uint16_t)&spi_ad_buffer_1;
-    DMA2STBH = 0;
-    DMA2PAD = (uint16_t)&SPI2BUF;
+    SPI2_DMA2STA_set();
+    DMA2PAD = (uint16_t) &SPI2BUF;
     _DMA2IP = 2;
     _DMA2IF = 0;
     _DMA2IE = 1;
@@ -221,11 +234,11 @@ void SPI2_init() {
     DMA3CNT = 0;
     //0b0000000000100001 = SPI2 - Transfer Done
     DMA3REQ = 0b0000000000100001;
-    DMA3STAL = (uint16_t)&spi_ad_command;
+    DMA3STAL = (uint16_t) &spi_ad_command;
     DMA3STAH = 0;
     DMA3STBL = 0;
     DMA3STBH = 0;
-    DMA3PAD = (uint16_t)&SPI2BUF;
+    DMA3PAD = (uint16_t) &SPI2BUF;
     _DMA3IP = 2;
     _DMA3IF = 0;
     _DMA3IE = 0;
@@ -237,58 +250,27 @@ void SPI2_init() {
     //enable /CONVST (or with inverted /SS)
     _LATA1 = 0;
 }
-#pragma GCC diagnostic warning "-Wpointer-to-int-cast"
 
 
-void __attribute__((__interrupt__, no_auto_psv)) _DMA2Interrupt(void) {
+void __attribute__((__interrupt__, auto_psv)) _DMA2Interrupt(void) {
     if (_PPST2 == 1) {
         spi_ad_buffer_full[0] = true;
     } else {
         spi_ad_buffer_full[1] = true;
     }
 
-_DMA2IF = 0;
-return;
-
-    //copy AD to DA buffer
-    static uint16_t i;
-    static uint16_t da_ptr = 0;
-    if (spi_ad_buffer_full[0]) {
-        for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i];
-            spi_da_buffer_0[da_ptr++] = 0;
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i+1];
-            spi_da_buffer_0[da_ptr++] = 0;
-            if (da_ptr >= SPI_DA_BUFFER_SIZE<<1) {
-                da_ptr = 0;
-            }
-        }
-        spi_ad_buffer_full[0] = false;
-    }
-    if (spi_ad_buffer_full[1]) {
-        for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i];
-            spi_da_buffer_0[da_ptr++] = 0;
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i+1];
-            spi_da_buffer_0[da_ptr++] = 0;
-            if (da_ptr >= SPI_DA_BUFFER_SIZE<<1) {
-                da_ptr = 0;
-            }
-        }
-        spi_ad_buffer_full[1] = false;
-    }
-
     _DMA2IF = 0;
+    return;
 }
 
-void __attribute__((__interrupt__, no_auto_psv)) _DMA3Interrupt(void) {
+void __attribute__((__interrupt__, auto_psv)) _DMA3Interrupt(void) {
     _DMA3IF = 0;
 }
 
 
 volatile static uint32_t spi2_errors = 0;
 
-void __attribute__((interrupt, no_auto_psv)) _SPI2ErrInterrupt(void) {
+void __attribute__((interrupt, auto_psv)) _SPI2ErrInterrupt(void) {
     spi2_errors++;
     if (SPI2STATbits.SPIROV == 1) {
         SPI2STATbits.SPIROV = 0;
