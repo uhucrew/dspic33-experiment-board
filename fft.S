@@ -19,9 +19,8 @@ _apply_window:
     MOV		W5,[W3++]
     MOV		[W2++],W6
     MUL.SU	W6,[W1++],W4
-    MOV		W5,[W3++]
 apply_window_end:
-    NOP
+    MOV		W5,[W3++]
     RETURN
 
 

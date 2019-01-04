@@ -117,9 +117,9 @@ int main(int argc, char** argv) {
     timer2_init();
     //start I2C to output debug info to display
     I2C2_init();
-    lcd_init();
-    fb_clear();
-    fb_show();
+//    lcd_init();
+//    fb_clear();
+//    fb_show();
     //initialize rotary encoder
     QEI_init();
     //initialize dds variables
@@ -151,6 +151,7 @@ int main(int argc, char** argv) {
     //main loop manage menu
     while (1)
     {
+        apply_window(SPI_AD_BUFFER_SIZE>>1, window_fn_buffer, spi_ad_buffer_0, spi_ad_buffer_0);
         fb_drawPixel(127, 63, status);
 
         qei_diff = qei_last - (int32_t)(((uint32_t)POS1CNTH<<16) + POS1CNTL);
@@ -185,7 +186,7 @@ int main(int argc, char** argv) {
             fb_draw_string (0, 1, empty_line);
             fb_draw_string (0, 1, lcd_string_buffer);
         }
-        fb_show();
+//        fb_show();
 
         status = status ^ 1;
     }
