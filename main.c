@@ -75,7 +75,7 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
     //sum up volume to be displayed in main loop
     if (spi_ad_buffer_full[0]) {
         //use half buffer size as number of points (for stereo)
-        apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_0, spi_ad_buffer_0, window_fn_buffer);
+        //apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_0, spi_ad_buffer_0, window_fn_buffer);
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -89,7 +89,7 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
     }
     if (spi_ad_buffer_full[1]) {
         //use half buffer size as number of points (for stereo)
-        apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_1, spi_ad_buffer_1, window_fn_buffer);
+        //apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_1, spi_ad_buffer_1, window_fn_buffer);
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i];
             spi_da_buffer_0[da_ptr++] = 0;

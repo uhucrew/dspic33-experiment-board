@@ -51,7 +51,7 @@
  * Bekanntmachen globaler Variablen
  */
 
-__eds__ extern uint8_t buffer[1024];
+extern uint8_t buffer[1024];
 extern char lcd_string_buffer[256];
 
 /*******************************************************************************
@@ -59,7 +59,7 @@ extern char lcd_string_buffer[256];
  */
 
 void lcd_init(void);
-void lcd_sendFramebuffer(__eds__ uint8_t *buffer);
+void lcd_sendFramebuffer(uint8_t *buffer);
 void lcd_invert(uint8_t inverted);
 void lcd_sendCommand(uint8_t command);
 void lcd_sendData(uint8_t data);

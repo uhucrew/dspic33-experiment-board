@@ -97,7 +97,8 @@ uint64_t running_time() {
            + timer_ms_rtc;
 }
 
-
+//do not optimize delay functions
+#pragma GCC optimize ("O0")
 bool wait_us_for_register_bits(volatile uint16_t *reg, uint16_t bitmask, bool desired_state, uint32_t max_wait_us) {
     if (max_wait_us == 0) {
         if ((*reg & bitmask) == 0 && desired_state == false) return true;
@@ -122,6 +123,7 @@ void timer_delay_ms(uint32_t ms) {
     volatile uint32_t start_timer_ms = timer_ms;
     while ((uint32_t)((int32_t)(timer_ms - start_timer_ms)) < ms);
 }
+#pragma GCC optimize ("O1")
 
 
 static uint16_t timer3_reload = (uint16_t)(FCY / 1 / 20000);

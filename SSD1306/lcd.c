@@ -16,7 +16,7 @@
  * Framebuffer
  */
 
-__eds__ uint8_t buffer[1024];
+uint8_t buffer[1024];
 char lcd_string_buffer[256];
 
 /*******************************************************************************
@@ -106,7 +106,7 @@ void lcd_invert(uint8_t inverted)
  * Übertragen des Framebuffers an das OLED-Display
  */
 
-void lcd_sendFramebuffer(__eds__ uint8_t *buffer)
+void lcd_sendFramebuffer(uint8_t *buffer)
 {
     lcd_sendCommand(SSD1306_COLUMNADDR);
     lcd_sendCommand(0x00);
