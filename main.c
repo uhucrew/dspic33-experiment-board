@@ -158,6 +158,7 @@ int main(int argc, char** argv) {
     
     //main loop manage menu
     while (1) {
+        fb_clear();
         fb_drawPixel(127, 63, status);
 
         qei_diff = qei_last - (int32_t)(((uint32_t)POS1CNTH<<16) + POS1CNTL);
@@ -180,7 +181,6 @@ int main(int argc, char** argv) {
             last_running_time = running_time();
         }
 
-        fb_clear();
         if (!menu_active) {
             snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "VOLUME:  %ld", volume);
             fb_draw_string (0, 0, empty_line);
