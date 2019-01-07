@@ -50,22 +50,23 @@
 
 #include "init.h"
 #include "sine.h"
-#include "fft.h"
-#include "delay.h"
 #include "timer_x.h"
+#include "delay.h"
 #include "i2c_x.h"
 #include "i2c_eep.h"
 #include "i2c_misc.h"
 #include "SSD1306/lcd.h"
 #include "spi_x.h"
 #include "qei_x.h"
+#include "fft.h"
+#include "window.h"
 
 
-
+uint64_t processing_time = 0;
 
 //working tasks timer interrupt, save psv and working registers
-void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void)
-{
+void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
+    uint64_t start_processing_time = running_time();
     static uint16_t i;
     static uint16_t da_ptr = 0;
 
@@ -74,7 +75,7 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void)
     //sum up volume to be displayed in main loop
     if (spi_ad_buffer_full[0]) {
         //use half buffer size as number of points (for stereo)
-        apply_window(SPI_AD_BUFFER_SIZE>>1, window_fn_buffer, spi_ad_buffer_0, spi_ad_buffer_0);
+        apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_0, spi_ad_buffer_0, window_fn_buffer);
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -88,7 +89,7 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void)
     }
     if (spi_ad_buffer_full[1]) {
         //use half buffer size as number of points (for stereo)
-        apply_window(SPI_AD_BUFFER_SIZE>>1, window_fn_buffer, spi_ad_buffer_1, spi_ad_buffer_1);
+        apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_1, spi_ad_buffer_1, window_fn_buffer);
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -101,6 +102,7 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void)
         spi_ad_buffer_full[1] = false;
     }
 
+    processing_time += running_time() - start_processing_time;
     //clear interrupt flag
     _T3IF = 0;
 }
@@ -117,21 +119,24 @@ int main(int argc, char** argv) {
     timer2_init();
     //start I2C to output debug info to display
     I2C2_init();
-//    lcd_init();
-//    fb_clear();
-//    fb_show();
+    //mute before SPI init
+    set_volume(I2C_ADDR_MAX5387, 0);
+    lcd_init();
+    fb_clear();
+    fb_show();
     //initialize rotary encoder
     QEI_init();
     //initialize dds variables
     set_dds_step(48, 55.0, 880.0);
 
-    setup_window_fn_buffer(rectangle_window);
+    setup_window_fn_buffer(window_fn_buffer, hamming_window);
 
     //start AD/DA converter and read/send data continuously
     SPI1_init();
     SPI2_init();
     //start timer for working tasks (check buffers and process data)
     timer3_init();
+
 
 /*
     uint16_t num_read;
@@ -144,14 +149,15 @@ int main(int argc, char** argv) {
 
     static const char empty_line[] = "                                ";
     static uint8_t status = 1;
+    static uint16_t ms_per_loop = 0;
     static int32_t qei_diff, qei_last = 0, volume = 128, loop_count = 0;
     static bool menu_active = false;
     uint64_t last_running_time = running_time();
+
+    set_volume(I2C_ADDR_MAX5387, volume);
     
     //main loop manage menu
-    while (1)
-    {
-        apply_window(SPI_AD_BUFFER_SIZE>>1, window_fn_buffer, spi_ad_buffer_0, spi_ad_buffer_0);
+    while (1) {
         fb_drawPixel(127, 63, status);
 
         qei_diff = qei_last - (int32_t)(((uint32_t)POS1CNTH<<16) + POS1CNTL);
@@ -166,27 +172,32 @@ int main(int argc, char** argv) {
                 if (volume < 0) volume = 0;
                 if (volume > 255) volume = 255;
                 set_volume(I2C_ADDR_MAX5387, (uint8_t)volume);
-                fb_clear();
-                snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "VOLUME:  %ld", volume);
-                fb_draw_string (0, 0, empty_line);
-                fb_draw_string (0, 0, lcd_string_buffer);
-            }
-            else {
-                fb_clear();
-                snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "POS1CNT:  %ld", ((uint32_t)POS1CNTH<<16) + POS1CNTL);
-                fb_draw_string (0, 0, empty_line);
-                fb_draw_string (0, 0, lcd_string_buffer);
             }
         }
 
         if (++loop_count % 10 == 0) {
-            uint16_t ms_per_loop = (uint16_t)((running_time() - last_running_time) / 10);
+            ms_per_loop = (uint16_t)((running_time() - last_running_time) / 10);
             last_running_time = running_time();
-            snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "ms/loop: %u", ms_per_loop);
-            fb_draw_string (0, 1, empty_line);
-            fb_draw_string (0, 1, lcd_string_buffer);
         }
-//        fb_show();
+
+        fb_clear();
+        if (!menu_active) {
+            snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "VOLUME:  %ld", volume);
+            fb_draw_string (0, 0, empty_line);
+            fb_draw_string (0, 0, lcd_string_buffer);
+        }
+        else {
+            snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "POS1CNT:  %ld", ((uint32_t)POS1CNTH<<16) + POS1CNTL);
+            fb_draw_string (0, 0, empty_line);
+            fb_draw_string (0, 0, lcd_string_buffer);
+        }
+        snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "ms/loop: %u", ms_per_loop);
+        fb_draw_string (0, 1, empty_line);
+        fb_draw_string (0, 1, lcd_string_buffer);
+        snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "pct cpu: %u", (uint16_t)((processing_time * 100) / last_running_time));
+        fb_draw_string (0, 2, empty_line);
+        fb_draw_string (0, 2, lcd_string_buffer);
+        fb_show();
 
         status = status ^ 1;
     }

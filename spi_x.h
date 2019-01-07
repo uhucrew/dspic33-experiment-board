@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 #include <stdbool.h>
+#include <dsp.h>
 
 
 //#define SPIBUF_IN_EDS
@@ -35,15 +36,15 @@ extern "C" {
 
 
 #ifdef SPIBUF_IN_EDS
-__eds__ extern uint16_t spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(eds)));
-__eds__ extern uint16_t spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(eds)));
-__eds__ extern uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(eds)));
-__eds__ extern uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(eds)));
+__eds__ extern fractional spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory),eds));
+__eds__ extern fractional spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory),eds));
+__eds__ extern fractional spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory),eds));
+__eds__ extern fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory),eds));
 #else
-extern uint16_t spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
-extern uint16_t spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
-extern uint16_t spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
-extern uint16_t spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
+extern fractional spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
+extern fractional spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
+extern fractional spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
+extern fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
 #endif
 extern volatile bool spi_ad_buffer_full[2];
 extern volatile bool spi_da_buffer_empty[2];

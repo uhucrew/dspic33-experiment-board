@@ -3,24 +3,24 @@
     .text
 
     //apply window function to buffer
-    //extern void apply_window(uint16_t points, uint16_t *window_fn_buffer uint16_t *buffer, uint16_t *outbuffer);
-    .global	_apply_window
+    .global	_apply_window_x
 _apply_window:
+    RETURN
     //W0: number of points
-    //W1: pointer to window function
-    //W2: pointer to buffer with data
-    //W3: pointer to output buffer
-    //W4:W5: result regsiter
-    //W6: temporary working register for data
+    //W1: pointer to buffer with data
+    //W2: pointer to output buffer
+    //W5:W4: pointer to window function
+    //W7:W6: result regsiter
+    //W3: temporary working register for data
     SUB		#1, W0
-    DO		W0,apply_window_end
-    MOV		[W2++],W6
-    MUL.SU	W6,[W1],W4
-    MOV		W5,[W3++]
-    MOV		[W2++],W6
-    MUL.SU	W6,[W1++],W4
+    DO		W0, apply_window_end
+    MOV		[W2++], W3
+    MUL.SU	W6, [W1], W4
+    MOV		W5, [W3++]
+    MOV		[W2++], W6
+    MUL.SU	W6, [W1++], W4
 apply_window_end:
-    MOV		W5,[W3++]
+    MOV		W5, [W3++]
     RETURN
 
 
@@ -28,10 +28,6 @@ apply_window_end:
 /*
     .global	_apply_window
 _apply_window:
-    //W0: number of points
-    //W1: pointer to ymemory with window function
-    //W2: pointer to buffer with data
-    //W3: pointer to output buffer
     SUB		#1, W0
     //prefetch registers
     MOV		W2, W8

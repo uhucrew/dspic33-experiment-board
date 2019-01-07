@@ -1,9 +1,8 @@
 #include <stdbool.h>
 #include <xc.h>
 
-#include "defines.h"
-#include "delay.h"
 #include "timer_x.h"
+#include "delay.h"
 
 //1ms timer
 void timer1_init() {
@@ -55,9 +54,7 @@ void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
     _T1IF = 0;
 }
 
-uint16_t timer2_reload = (uint16_t)(FCY / 1 / 100000);
-uint16_t timer2_gap = (uint16_t)((uint32_t)(FCY / 1 / 1000) - 99 * (uint16_t)(FCY / 1 / 100000));
-//exact 100 * 10us timer
+//nearly exact 100 * 10us timer
 void timer2_init() {
     //disable timer
     T2CONbits.TON = 0;
@@ -81,21 +78,17 @@ void timer2_init() {
     T2CONbits.TON = 1;
 }
 
-volatile uint32_t timer_10us = 0;
+volatile uint16_t timer_10us = 0;
 void __attribute__((__interrupt__, auto_psv)) _T2Interrupt(void)
 {
-    if (timer_10us++ % 100 == 0) {
-        PR2 = timer2_gap - 1;
-    }
-    else {
-        PR2 = timer2_reload - 1;
-    }
+    timer_10us++;
 
     //clear interrupt flag
     _T2IF = 0;
 }
 
 
+//rtc ms timer since start
 uint64_t running_time() {
     return   (uint64_t)timer_d_rtc * 86400000
            + (uint32_t)timer_h_rtc * 3600000

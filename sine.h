@@ -13,7 +13,10 @@ extern "C" {
 #endif
 
 
-#define PI                  3.1428571428571428571428571428571
+#include <dsp.h>
+
+
+//#define PI                  3.1428571428571428571428571428571
 #define SINE_TABLE_TYPE     uint32_t
 #define SINE_POINTS         4096
 

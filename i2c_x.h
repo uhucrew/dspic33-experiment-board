@@ -22,8 +22,8 @@ extern "C" {
 #define I2C_WRITE           0
 #define I2C_ACK             0
 #define I2C_NACK            1
-#define I2C_WAIT_US_DEFAULT 1000000
-#define I2C_WAIT_US_LONG    5000000
+#define I2C_WAIT_US_DEFAULT 2000000
+#define I2C_WAIT_US_LONG    8000000
 
 
 void I2C2_init(void);

@@ -2,7 +2,7 @@
 
 var fs= require('fs');
 
-var fftHeader= '../fft.h';
+var fftHeader= '../window.h';
 
 
 
@@ -10,7 +10,8 @@ var windowFunctions= [];
 var fftPoints= 512;
 var dataType= 'uint16_t';
 var dataSize= 16;
-var dataFactor= Math.pow(2, dataSize);
+var dataFactor= 1<<(dataSize - 1);
+var dataMax= dataFactor - 1;
 var zeroPadding= '0000';
 
 var headerReader= require('readline').createInterface({
@@ -30,7 +31,8 @@ headerReader.on('line', function(line) {
                 dataType= part;
                 console.log('INFO: found FFT data type: ', dataType);
                 dataSize= +part.match(/\d+/)[0];
-                dataFactor= Math.pow(2, dataSize);
+                dataFactor= 1<<(dataSize - 1);
+                dataMax= dataFactor - 1;
                 console.log('INFO: found FFT data size: ', dataSize);
                 switch (dataSize) {
                 case 8:
@@ -56,7 +58,7 @@ headerReader.on('line', function(line) {
                 }
             }
         });
-        var windowFunction= line.split(/_t/)[1].trim().split(/\[/)[0];
+        var windowFunction= line.split(/fractional/)[1].trim().split(/\[/)[0];
         console.log('INFO: found required window function: ', windowFunction);
         windowFunctions.push(windowFunction);
     }
@@ -65,7 +67,7 @@ headerReader.on('line', function(line) {
 
 
 var rectangle_window= function(step, points) {
-    return 0.5;
+    return 1;
 };
 
 var hamming_window= function(step, points) {
@@ -127,12 +129,23 @@ var writeWindow= function(windowName, points) {
 
     console.log('INFO: calculating ' + windowName + ', output to ../' + windowName + '.c');
     var outputFile= '../' + windowName + '.c';
-    fs.writeFileSync(outputFile, '#include <xc.h>\n\n\n', 'utf8');
-    fs.appendFileSync(outputFile, '__prog__ uint16_t ' + windowName + '[' + points + '] __attribute__((space(auto_psv))) = {\n', 'utf8');
+    fs.writeFileSync(outputFile, '#include <xc.h>\n#include <dsp.h>\n\n\n', 'utf8');
+    fs.appendFileSync(outputFile, '__prog__ fractional ' + windowName + '[' + points + '] __attribute__((space(auto_psv))) = {\n', 'utf8');
     var line= '  ';
     for (var i= 0; i < points; i++) {
-        var value= Math.min(dataFactor - 1, functions[windowName](i, points) * dataFactor);
-        var hexStr= Math.round(value).toString(16);
+        var value= functions[windowName](i, points);
+        if (value < 0) {
+            value= Math.round((dataFactor<<1) + value * dataFactor);
+            if (value < dataFactor) value= dataFactor;
+            if (value > ((dataFactor<<1) - 1)) value= (dataFactor<<1) - 1;
+            var hexStr= value.toString(16);
+        }
+        else {
+            value= Math.round(value * dataFactor);
+            if (value > dataMax) value= dataMax;
+            if (value < 0) value = 0;
+            var hexStr= value.toString(16);
+        }
         line += '  0x' + zeroPadding.substr(hexStr.length) + hexStr;
         if (i < points - 1) line += ',';
         if ((i + 1) % 8 === 0) {

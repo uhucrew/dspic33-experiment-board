@@ -20,6 +20,7 @@
       <itemPath>cni.h</itemPath>
       <itemPath>i2c_misc.h</itemPath>
       <itemPath>fft.h</itemPath>
+      <itemPath>window.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -30,7 +31,6 @@
                    projectFiles="true">
       <itemPath>main.c</itemPath>
       <itemPath>i2c_x.c</itemPath>
-      <itemPath>iic_eep.c</itemPath>
       <itemPath>delay.S</itemPath>
       <itemPath>timer_x.c</itemPath>
       <itemPath>init.c</itemPath>
@@ -39,7 +39,6 @@
       <itemPath>sine.c</itemPath>
       <itemPath>qei_x.c</itemPath>
       <itemPath>cni.c</itemPath>
-      <itemPath>iic_misc.c</itemPath>
       <itemPath>blackman_harris_window.c</itemPath>
       <itemPath>blackman_window.c</itemPath>
       <itemPath>hamming_window.c</itemPath>
@@ -47,6 +46,9 @@
       <itemPath>buffer.S</itemPath>
       <itemPath>gauss_window.c</itemPath>
       <itemPath>fft.S</itemPath>
+      <itemPath>i2c_eep.c</itemPath>
+      <itemPath>i2c_misc.c</itemPath>
+      <itemPath>window.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -65,9 +67,9 @@
         <targetDevice>dsPIC33EP512MC202</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>Simulator</platformTool>
+        <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.35</languageToolchainVersion>
+        <languageToolchainVersion>1.34</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
@@ -252,7 +254,6 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
