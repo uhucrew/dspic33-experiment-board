@@ -22,11 +22,12 @@ extern "C" {
 //keep in sync with SPI_AD_BUFFER_SIZE/2
 #define FFT_POINTS              1024
 
-#define	RECTANGLE_WINDOW        0
+#define	DIRICHLET_WINDOW        0
 #define	HAMMING_WINDOW          1
 #define	BLACKMAN_WINDOW         2
 #define	BLACKMAN_HARRIS_WINDOW  3
 #define	GAUSS_WINDOW            4
+#define	KAISER_WINDOW           5
 
 
 
@@ -36,11 +37,12 @@ void apply_window(uint16_t points, __eds__ fractional *buffer, __eds__ fractiona
 void apply_window(uint16_t points, fractional *buffer, fractional *outbuffer, fractional *window_fn_buffer_ptr);
 #endif
 
-__prog__ extern fractional rectangle_window[FFT_POINTS] __attribute__((space(auto_psv)));
+__prog__ extern fractional dirichlet_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional hamming_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional blackman_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional blackman_harris_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional gauss_window[FFT_POINTS] __attribute__((space(auto_psv)));
+__prog__ extern fractional kaiser_window[FFT_POINTS] __attribute__((space(auto_psv)));
 
 extern fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(0xc000)));
 

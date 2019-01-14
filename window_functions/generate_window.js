@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 var fs= require('fs');
+var util= require('util');
+var BESSEL= require('bessel');
 
 var fftHeader= '../window.h';
 
@@ -14,6 +16,12 @@ var dataFactor= 1<<(dataSize - 1);
 var dataMax= dataFactor - 1;
 var zeroPadding= '0000';
 
+var isNumeric= function(obj) {
+    return !util.isArray(obj) && (obj - parseFloat(obj) + 1) >= 0;
+};
+
+
+console.log('INFO: reading header file: ', fftHeader);
 var headerReader= require('readline').createInterface({
     input: fs.createReadStream(fftHeader)
 });
@@ -66,13 +74,14 @@ headerReader.on('line', function(line) {
 
 
 
-var rectangle_window= function(step, points) {
-    return 1;
+var dirichlet_window= function(step, points, factor) {
+    var factor= isNumeric(factor) ? factor : 1;
+    return factor;
 };
 
-var hamming_window= function(step, points) {
-    var alpha= 25 / 46;
-    var beta= 1 - alpha;
+var hamming_window= function(step, points, alpha, beta) {
+    var alpha= isNumeric(alpha) ? alpha : 25 / 46;
+    var beta= isNumeric(beta) ? beta : 1 - alpha;
 
     var value= alpha - beta * Math.cos((2 * Math.PI * step) / (points - 1));
     return value;
@@ -80,10 +89,10 @@ var hamming_window= function(step, points) {
 
 
 var blackman_window= function(step, points) {
-    var alpha= 0.16;
-    var a0= (1 - alpha) / 2;
-    var a1= 0.5;
-    var a2= alpha / 2;
+    var alpha= isNumeric(alpha) ? alpah : 0.16;
+    var a0= isNumeric(a0) ? a0 : (1 - alpha) / 2;;
+    var a1= isNumeric(a1) ? a1 : 0.5;
+    var a2= isNumeric(a2) ? a2 : alpha / 2;
 
     var value= a0 - a1 * Math.cos((2 * Math.PI * step) / (points - 1)) + a2 * Math.cos((4 * Math.PI * step) / (points - 1));
     if (value < 1 / dataFactor) value = 0;
@@ -91,11 +100,11 @@ var blackman_window= function(step, points) {
 };
 
 
-var blackman_harris_window= function(step, points) {
-    var a0= 0.35875;
-    var a1= 0.48829;
-    var a2= 0.14128;
-    var a3= 0.01168;
+var blackman_harris_window= function(step, points, a0, a1, a2, a3) {
+    var a0= isNumeric(a0) ? a0 : 0.35875;
+    var a1= isNumeric(a1) ? a1 : 0.48829;
+    var a2= isNumeric(a2) ? a2 : 0.14128;
+    var a3= isNumeric(a3) ? a3 : 0.01168;
 
     var value= a0 - a1 * Math.cos((2 * Math.PI * step) / (points - 1)) + a2 * Math.cos((4 * Math.PI * step) / (points - 1)) - a3 * Math.cos((6 * Math.PI * step) / (points - 1));
     if (value < 1 / dataFactor) value = 0;
@@ -103,21 +112,30 @@ var blackman_harris_window= function(step, points) {
 };
 
 
-var gauss_window= function(step, points) {
-    var sigma= 0.4
+var gauss_window= function(step, points, sigma) {
+    var sigma= isNumeric(sigma) ? sigma : 0.4;
 
-    //FIXME: correct wrong function
-    var value= Math.pow(Math.E, Math.pow(2, ((step - (points - 1) / 2) / ((points - 1) / 2 * sigma))) * -0.5);
+    var gaussExponent= (step - (points - 1) / 2) / (sigma * (points - 1) / 2);
+    var value= Math.pow(Math.E, -0.5 * gaussExponent * gaussExponent);
     return value;
 };
 
+var kaiser_window= function(step, points, alpha) {
+    var step= step - points / 2;
+    var alpha= isNumeric(alpha) ? alpha : 2;
+    var alphaFactor= Math.pow(( 1 - (2 * step / points) * (2 * step / points)), 0.5);
+
+    var value= BESSEL.besseli(alpha * alphaFactor, 0) / BESSEL.besseli(alpha, 0);
+    return value;
+};
 
 var functions= {
-    rectangle_window: rectangle_window,
+    dirichlet_window: dirichlet_window,
     hamming_window: hamming_window,
     blackman_window: blackman_window,
     blackman_harris_window: blackman_harris_window,
     gauss_window: gauss_window,
+    kaiser_window: kaiser_window,
 };
 
 
