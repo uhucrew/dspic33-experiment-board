@@ -29,8 +29,10 @@ void apply_window(uint16_t points, fractional *buffer, fractional *outbuffer, fr
     acc_a = __builtin_clr_prefetch(&buffer, &buffer_val, 2, &window_fn_buffer_ptr, &window_fn_buffer_val, 0, 0, 0);
     for (i = 0; i < points; i++) {
         acc_a = __builtin_mpy(buffer_val, window_fn_buffer_val, &buffer, &buffer_val, 2, &window_fn_buffer_ptr, &window_fn_buffer_val, 2);
+        /*
         (*outbuffer++) = __builtin_ACCH(acc_a);
         acc_a = __builtin_mpy(buffer_val, window_fn_buffer_val, &buffer, &buffer_val, 2, &window_fn_buffer_ptr, &window_fn_buffer_val, 0);
         (*outbuffer++) = __builtin_ACCH(acc_a);
+        */
     }
 }

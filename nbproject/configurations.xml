@@ -39,16 +39,19 @@
       <itemPath>sine.c</itemPath>
       <itemPath>qei_x.c</itemPath>
       <itemPath>cni.c</itemPath>
-      <itemPath>blackman_harris_window.c</itemPath>
-      <itemPath>blackman_window.c</itemPath>
-      <itemPath>hamming_window.c</itemPath>
-      <itemPath>rectangle_window.c</itemPath>
       <itemPath>buffer.S</itemPath>
-      <itemPath>gauss_window.c</itemPath>
-      <itemPath>fft.S</itemPath>
       <itemPath>i2c_eep.c</itemPath>
       <itemPath>i2c_misc.c</itemPath>
       <itemPath>window.c</itemPath>
+      <itemPath>window_functions/blackman_harris_window.c</itemPath>
+      <itemPath>window_functions/blackman_window.c</itemPath>
+      <itemPath>window_functions/dirichlet_window.c</itemPath>
+      <itemPath>window_functions/gauss_window.c</itemPath>
+      <itemPath>window_functions/hamming_window.c</itemPath>
+      <itemPath>window_functions/kaiser_window.c</itemPath>
+      <itemPath>window_functions/bartlett_window.c</itemPath>
+      <itemPath>window_functions/flat_top_window.c</itemPath>
+      <itemPath>fft.S</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -58,6 +61,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>/home/main/daten/ELEKTRO/bat-detector-2.0</Elem>
+    <Elem>window_functions</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -67,9 +71,9 @@
         <targetDevice>dsPIC33EP512MC202</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.34</languageToolchainVersion>
+        <languageToolchainVersion>1.35</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
@@ -313,13 +317,6 @@
         <property key="periphComp6.gte" value="gt"/>
         <property key="reset.scl" value="false"/>
         <property key="reset.type" value="MCLR"/>
-        <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
-        <property key="tracecontrol.select" value="0"/>
-        <property key="tracecontrol.stallontracebufferfull" value="false"/>
-        <property key="tracecontrol.timestamp" value="0"/>
-        <property key="tracecontrol.tracebufmax" value="546000"/>
-        <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
-        <property key="tracecontrol.traceresetonrun" value="false"/>
         <property key="uart0io.output" value="window"/>
         <property key="uart0io.outputfile" value=""/>
         <property key="uart0io.uartioenabled" value="false"/>
