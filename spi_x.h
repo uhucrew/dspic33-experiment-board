@@ -49,7 +49,6 @@ extern fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI
 extern volatile bool spi_ad_buffer_full[2];
 extern volatile bool spi_da_buffer_empty[2];
 
-
 void SPI1_init();
 void SPI2_init();
 

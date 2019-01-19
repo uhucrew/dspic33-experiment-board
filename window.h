@@ -32,9 +32,10 @@ extern "C" {
 
 
 #ifdef SPIBUF_IN_EDS
-void apply_window(uint16_t points, __eds__ fractional *buffer, __eds__ fractional *outbuffer, __eds__ fractional *window_fn_buffer_ptr);
+//FIXME: fix function to work with __eds__ buffers
+void apply_window(uint16_t points, __eds__ fractional *buffer, __eds__ fractional *outbuffer);
 #else
-void apply_window(uint16_t points, fractional *buffer, fractional *outbuffer, fractional *window_fn_buffer_ptr);
+void apply_window(uint16_t points, fractional *buffer, fractional *outbuffer);
 #endif
 
 __prog__ extern fractional dirichlet_window[FFT_POINTS] __attribute__((space(auto_psv)));

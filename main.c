@@ -60,6 +60,7 @@
 #include "qei_x.h"
 #include "fft.h"
 #include "window.h"
+#include "buffer.h"
 
 
 uint64_t processing_time = 0;
@@ -75,7 +76,9 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
     //sum up volume to be displayed in main loop
     if (spi_ad_buffer_full[0]) {
         //use half buffer size as number of points (for stereo)
-        //apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_0, spi_ad_buffer_0, window_fn_buffer);
+        apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_0, spi_ad_buffer_0);
+        //convert_samplerate(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, spi_da_buffer_0);
+/*
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -85,11 +88,14 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
                 da_ptr = 0;
             }
         }
+*/
         spi_ad_buffer_full[0] = false;
     }
     if (spi_ad_buffer_full[1]) {
         //use half buffer size as number of points (for stereo)
-        //apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_1, spi_ad_buffer_1, window_fn_buffer);
+        apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_1, spi_ad_buffer_1);
+        //convert_samplerate(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, spi_da_buffer_1);
+/*
         for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
             spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i];
             spi_da_buffer_0[da_ptr++] = 0;
@@ -99,6 +105,7 @@ void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
                 da_ptr = 0;
             }
         }
+*/
         spi_ad_buffer_full[1] = false;
     }
 
@@ -129,7 +136,7 @@ int main(int argc, char** argv) {
     //initialize dds variables
     set_dds_step(48, 55.0, 880.0);
 
-    setup_window_fn_buffer(window_fn_buffer, hamming_window);
+    setup_window_fn_buffer(window_fn_buffer, gauss_window);
 
     //start AD/DA converter and read/send data continuously
     SPI1_init();
@@ -194,7 +201,8 @@ int main(int argc, char** argv) {
         snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "ms/loop: %u", ms_per_loop);
         fb_draw_string (0, 1, empty_line);
         fb_draw_string (0, 1, lcd_string_buffer);
-        snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "pct cpu: %u", (uint16_t)((processing_time * 100) / last_running_time));
+        uint16_t pctcpu = (uint16_t)((processing_time * 100) / last_running_time);
+        snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "pct cpu: %u", pctcpu);
         fb_draw_string (0, 2, empty_line);
         fb_draw_string (0, 2, lcd_string_buffer);
         fb_show();

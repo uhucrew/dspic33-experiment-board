@@ -21,6 +21,8 @@
       <itemPath>i2c_misc.h</itemPath>
       <itemPath>fft.h</itemPath>
       <itemPath>window.h</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/buffer.h</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/dsp.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -42,13 +44,15 @@
       <itemPath>blackman_harris_window.c</itemPath>
       <itemPath>blackman_window.c</itemPath>
       <itemPath>hamming_window.c</itemPath>
-      <itemPath>rectangle_window.c</itemPath>
       <itemPath>buffer.S</itemPath>
       <itemPath>gauss_window.c</itemPath>
-      <itemPath>fft.S</itemPath>
       <itemPath>i2c_eep.c</itemPath>
       <itemPath>i2c_misc.c</itemPath>
       <itemPath>window.c</itemPath>
+      <itemPath>window_asm.S</itemPath>
+      <itemPath>dirichlet_window.c</itemPath>
+      <itemPath>kaiser_window.c</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -254,6 +258,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
