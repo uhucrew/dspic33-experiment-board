@@ -14,7 +14,7 @@ extern "C" {
 
 
 void buffer_copy(uint16_t length, fractional *buffer, fractional *outbuffer);
-void convert_samplerate(uint16_t length, fractional *buffer, fractional *outbuffer);
+void convert_samplerate(uint16_t length, uint16_t samplerate_ratio, fractional *buffer, fractional *outbuffer);
 
 #ifdef	__cplusplus
 }

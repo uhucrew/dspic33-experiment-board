@@ -28,6 +28,8 @@ extern "C" {
 #define	BLACKMAN_HARRIS_WINDOW  3
 #define	GAUSS_WINDOW            4
 #define	KAISER_WINDOW           5
+#define	BARTLETT_WINDOW         6
+#define	FLAT_TOP_WINDOW         7
 
 
 
@@ -44,6 +46,8 @@ __prog__ extern fractional blackman_window[FFT_POINTS] __attribute__((space(auto
 __prog__ extern fractional blackman_harris_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional gauss_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional kaiser_window[FFT_POINTS] __attribute__((space(auto_psv)));
+__prog__ extern fractional bartlett_window[FFT_POINTS] __attribute__((space(auto_psv)));
+__prog__ extern fractional flat_top_window[FFT_POINTS] __attribute__((space(auto_psv)));
 
 extern fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(0xc000)));
 

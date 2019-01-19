@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c blackman_harris_window.c blackman_window.c hamming_window.c buffer.S gauss_window.c i2c_eep.c i2c_misc.c window.c window_asm.S dirichlet_window.c kaiser_window.c /home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c
+SOURCEFILES_QUOTED_IF_SPACED=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_harris_window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/flat_top_window.c dsp.c window_asm.S main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/blackman_harris_window.o ${OBJECTDIR}/blackman_window.o ${OBJECTDIR}/hamming_window.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/gauss_window.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/dirichlet_window.o ${OBJECTDIR}/kaiser_window.o ${OBJECTDIR}/_ext/1281703220/dsp.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/i2c_x.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/timer_x.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/SSD1306/lcd.o.d ${OBJECTDIR}/spi_x.o.d ${OBJECTDIR}/sine.o.d ${OBJECTDIR}/qei_x.o.d ${OBJECTDIR}/cni.o.d ${OBJECTDIR}/blackman_harris_window.o.d ${OBJECTDIR}/blackman_window.o.d ${OBJECTDIR}/hamming_window.o.d ${OBJECTDIR}/buffer.o.d ${OBJECTDIR}/gauss_window.o.d ${OBJECTDIR}/i2c_eep.o.d ${OBJECTDIR}/i2c_misc.o.d ${OBJECTDIR}/window.o.d ${OBJECTDIR}/window_asm.o.d ${OBJECTDIR}/dirichlet_window.o.d ${OBJECTDIR}/kaiser_window.o.d ${OBJECTDIR}/_ext/1281703220/dsp.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/dsp.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_x.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/timer_x.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/SSD1306/lcd.o.d ${OBJECTDIR}/spi_x.o.d ${OBJECTDIR}/sine.o.d ${OBJECTDIR}/qei_x.o.d ${OBJECTDIR}/cni.o.d ${OBJECTDIR}/buffer.o.d ${OBJECTDIR}/i2c_eep.o.d ${OBJECTDIR}/i2c_misc.o.d ${OBJECTDIR}/window.o.d ${OBJECTDIR}/window_functions/blackman_harris_window.o.d ${OBJECTDIR}/window_functions/blackman_window.o.d ${OBJECTDIR}/window_functions/dirichlet_window.o.d ${OBJECTDIR}/window_functions/gauss_window.o.d ${OBJECTDIR}/window_functions/hamming_window.o.d ${OBJECTDIR}/window_functions/kaiser_window.o.d ${OBJECTDIR}/window_functions/bartlett_window.o.d ${OBJECTDIR}/window_functions/flat_top_window.o.d ${OBJECTDIR}/dsp.o.d ${OBJECTDIR}/window_asm.o.d ${OBJECTDIR}/main.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/blackman_harris_window.o ${OBJECTDIR}/blackman_window.o ${OBJECTDIR}/hamming_window.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/gauss_window.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/dirichlet_window.o ${OBJECTDIR}/kaiser_window.o ${OBJECTDIR}/_ext/1281703220/dsp.o
+OBJECTFILES=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/dsp.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o
 
 # Source Files
-SOURCEFILES=main.c i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c blackman_harris_window.c blackman_window.c hamming_window.c buffer.S gauss_window.c i2c_eep.c i2c_misc.c window.c window_asm.S dirichlet_window.c kaiser_window.c /home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c
+SOURCEFILES=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_harris_window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/flat_top_window.c dsp.c window_asm.S main.c
 
 
 CFLAGS=
@@ -94,13 +94,6 @@ MP_LINKER_FILE_OPTION=,--script=p33EP512MC202.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.o.d 
-	@${RM} ${OBJECTDIR}/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/i2c_x.o: i2c_x.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c_x.o.d 
@@ -157,34 +150,6 @@ ${OBJECTDIR}/cni.o: cni.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  cni.c  -o ${OBJECTDIR}/cni.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/cni.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/cni.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/blackman_harris_window.o: blackman_harris_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/blackman_harris_window.o.d 
-	@${RM} ${OBJECTDIR}/blackman_harris_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  blackman_harris_window.c  -o ${OBJECTDIR}/blackman_harris_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/blackman_harris_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/blackman_harris_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/blackman_window.o: blackman_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/blackman_window.o.d 
-	@${RM} ${OBJECTDIR}/blackman_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  blackman_window.c  -o ${OBJECTDIR}/blackman_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/blackman_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/blackman_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/hamming_window.o: hamming_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/hamming_window.o.d 
-	@${RM} ${OBJECTDIR}/hamming_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  hamming_window.c  -o ${OBJECTDIR}/hamming_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/hamming_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/hamming_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/gauss_window.o: gauss_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/gauss_window.o.d 
-	@${RM} ${OBJECTDIR}/gauss_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  gauss_window.c  -o ${OBJECTDIR}/gauss_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/gauss_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/gauss_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/i2c_eep.o: i2c_eep.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c_eep.o.d 
@@ -206,35 +171,77 @@ ${OBJECTDIR}/window.o: window.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  window.c  -o ${OBJECTDIR}/window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/dirichlet_window.o: dirichlet_window.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/window_functions/blackman_harris_window.o: window_functions/blackman_harris_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_harris_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_harris_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/blackman_harris_window.c  -o ${OBJECTDIR}/window_functions/blackman_harris_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/blackman_harris_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/blackman_harris_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/blackman_window.o: window_functions/blackman_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/blackman_window.c  -o ${OBJECTDIR}/window_functions/blackman_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/blackman_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/blackman_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/dirichlet_window.o: window_functions/dirichlet_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/dirichlet_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/dirichlet_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/dirichlet_window.c  -o ${OBJECTDIR}/window_functions/dirichlet_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/dirichlet_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/dirichlet_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/gauss_window.o: window_functions/gauss_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/gauss_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/gauss_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/gauss_window.c  -o ${OBJECTDIR}/window_functions/gauss_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/gauss_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/gauss_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/hamming_window.o: window_functions/hamming_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/hamming_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/hamming_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/hamming_window.c  -o ${OBJECTDIR}/window_functions/hamming_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/hamming_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/hamming_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/kaiser_window.o: window_functions/kaiser_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/kaiser_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/kaiser_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/kaiser_window.c  -o ${OBJECTDIR}/window_functions/kaiser_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/kaiser_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/kaiser_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/bartlett_window.o: window_functions/bartlett_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/bartlett_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/bartlett_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/bartlett_window.c  -o ${OBJECTDIR}/window_functions/bartlett_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/bartlett_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/bartlett_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/flat_top_window.o: window_functions/flat_top_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/flat_top_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/flat_top_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/flat_top_window.c  -o ${OBJECTDIR}/window_functions/flat_top_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/flat_top_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/flat_top_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/dsp.o: dsp.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/dirichlet_window.o.d 
-	@${RM} ${OBJECTDIR}/dirichlet_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  dirichlet_window.c  -o ${OBJECTDIR}/dirichlet_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/dirichlet_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/dirichlet_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/dsp.o.d 
+	@${RM} ${OBJECTDIR}/dsp.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  dsp.c  -o ${OBJECTDIR}/dsp.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/dsp.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/dsp.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/kaiser_window.o: kaiser_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/kaiser_window.o.d 
-	@${RM} ${OBJECTDIR}/kaiser_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  kaiser_window.c  -o ${OBJECTDIR}/kaiser_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/kaiser_window.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/kaiser_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/_ext/1281703220/dsp.o: /home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1281703220" 
-	@${RM} ${OBJECTDIR}/_ext/1281703220/dsp.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1281703220/dsp.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  /home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c  -o ${OBJECTDIR}/_ext/1281703220/dsp.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1281703220/dsp.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1281703220/dsp.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+else
 ${OBJECTDIR}/i2c_x.o: i2c_x.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c_x.o.d 
@@ -291,34 +298,6 @@ ${OBJECTDIR}/cni.o: cni.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  cni.c  -o ${OBJECTDIR}/cni.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/cni.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/cni.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/blackman_harris_window.o: blackman_harris_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/blackman_harris_window.o.d 
-	@${RM} ${OBJECTDIR}/blackman_harris_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  blackman_harris_window.c  -o ${OBJECTDIR}/blackman_harris_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/blackman_harris_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/blackman_harris_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/blackman_window.o: blackman_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/blackman_window.o.d 
-	@${RM} ${OBJECTDIR}/blackman_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  blackman_window.c  -o ${OBJECTDIR}/blackman_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/blackman_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/blackman_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/hamming_window.o: hamming_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/hamming_window.o.d 
-	@${RM} ${OBJECTDIR}/hamming_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  hamming_window.c  -o ${OBJECTDIR}/hamming_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/hamming_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/hamming_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/gauss_window.o: gauss_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/gauss_window.o.d 
-	@${RM} ${OBJECTDIR}/gauss_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  gauss_window.c  -o ${OBJECTDIR}/gauss_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/gauss_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/gauss_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/i2c_eep.o: i2c_eep.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c_eep.o.d 
@@ -340,26 +319,75 @@ ${OBJECTDIR}/window.o: window.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  window.c  -o ${OBJECTDIR}/window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/dirichlet_window.o: dirichlet_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/dirichlet_window.o.d 
-	@${RM} ${OBJECTDIR}/dirichlet_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  dirichlet_window.c  -o ${OBJECTDIR}/dirichlet_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/dirichlet_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/dirichlet_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+${OBJECTDIR}/window_functions/blackman_harris_window.o: window_functions/blackman_harris_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_harris_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_harris_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/blackman_harris_window.c  -o ${OBJECTDIR}/window_functions/blackman_harris_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/blackman_harris_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/blackman_harris_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/kaiser_window.o: kaiser_window.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/kaiser_window.o.d 
-	@${RM} ${OBJECTDIR}/kaiser_window.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  kaiser_window.c  -o ${OBJECTDIR}/kaiser_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/kaiser_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/kaiser_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+${OBJECTDIR}/window_functions/blackman_window.o: window_functions/blackman_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/blackman_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/blackman_window.c  -o ${OBJECTDIR}/window_functions/blackman_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/blackman_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/blackman_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/_ext/1281703220/dsp.o: /home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1281703220" 
-	@${RM} ${OBJECTDIR}/_ext/1281703220/dsp.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1281703220/dsp.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  /home/main/daten/ELEKTRO/bat-detector-2.0/dsp.c  -o ${OBJECTDIR}/_ext/1281703220/dsp.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1281703220/dsp.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1281703220/dsp.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+${OBJECTDIR}/window_functions/dirichlet_window.o: window_functions/dirichlet_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/dirichlet_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/dirichlet_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/dirichlet_window.c  -o ${OBJECTDIR}/window_functions/dirichlet_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/dirichlet_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/dirichlet_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/gauss_window.o: window_functions/gauss_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/gauss_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/gauss_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/gauss_window.c  -o ${OBJECTDIR}/window_functions/gauss_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/gauss_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/gauss_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/hamming_window.o: window_functions/hamming_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/hamming_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/hamming_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/hamming_window.c  -o ${OBJECTDIR}/window_functions/hamming_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/hamming_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/hamming_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/kaiser_window.o: window_functions/kaiser_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/kaiser_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/kaiser_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/kaiser_window.c  -o ${OBJECTDIR}/window_functions/kaiser_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/kaiser_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/kaiser_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/bartlett_window.o: window_functions/bartlett_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/bartlett_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/bartlett_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/bartlett_window.c  -o ${OBJECTDIR}/window_functions/bartlett_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/bartlett_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/bartlett_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/window_functions/flat_top_window.o: window_functions/flat_top_window.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/window_functions" 
+	@${RM} ${OBJECTDIR}/window_functions/flat_top_window.o.d 
+	@${RM} ${OBJECTDIR}/window_functions/flat_top_window.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  window_functions/flat_top_window.c  -o ${OBJECTDIR}/window_functions/flat_top_window.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_functions/flat_top_window.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/window_functions/flat_top_window.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/dsp.o: dsp.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/dsp.o.d 
+	@${RM} ${OBJECTDIR}/dsp.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  dsp.c  -o ${OBJECTDIR}/dsp.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/dsp.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/dsp.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main.o.d 
+	@${RM} ${OBJECTDIR}/main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -msmall-code -mlarge-data -mlarge-scalar -mconst-in-code -O1 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

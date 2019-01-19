@@ -94,7 +94,11 @@ var blackman_window= function(step, points) {
     var a1= isNumeric(a1) ? a1 : 0.5;
     var a2= isNumeric(a2) ? a2 : alpha / 2;
 
-    var value= a0 - a1 * Math.cos((2 * Math.PI * step) / (points - 1)) + a2 * Math.cos((4 * Math.PI * step) / (points - 1));
+    var value=
+          a0
+        - a1 * Math.cos((2 * Math.PI * step) / (points - 1))
+        + a2 * Math.cos((4 * Math.PI * step) / (points - 1));
+
     if (value < 1 / dataFactor) value = 0;
     return value;
 };
@@ -106,7 +110,12 @@ var blackman_harris_window= function(step, points, a0, a1, a2, a3) {
     var a2= isNumeric(a2) ? a2 : 0.14128;
     var a3= isNumeric(a3) ? a3 : 0.01168;
 
-    var value= a0 - a1 * Math.cos((2 * Math.PI * step) / (points - 1)) + a2 * Math.cos((4 * Math.PI * step) / (points - 1)) - a3 * Math.cos((6 * Math.PI * step) / (points - 1));
+    var value=
+          a0
+        - a1 * Math.cos((2 * Math.PI * step) / (points - 1))
+        + a2 * Math.cos((4 * Math.PI * step) / (points - 1))
+        - a3 * Math.cos((6 * Math.PI * step) / (points - 1));
+
     if (value < 1 / dataFactor) value = 0;
     return value;
 };
@@ -121,13 +130,36 @@ var gauss_window= function(step, points, sigma) {
 };
 
 var kaiser_window= function(step, points, alpha) {
-    var step= step - points / 2;
-    var alpha= isNumeric(alpha) ? alpha : 2;
+    var step= step - (points - 1) / 2;
+    var alpha= isNumeric(alpha) ? alpha : 16;
     var alphaFactor= Math.pow(( 1 - (2 * step / points) * (2 * step / points)), 0.5);
 
     var value= BESSEL.besseli(alpha * alphaFactor, 0) / BESSEL.besseli(alpha, 0);
     return value;
 };
+
+var bartlett_window= function(step, points) {
+    var value= (2 / (points - 1)) * ((points - 1) / 2 - Math.abs(step - ((points - 1) / 2)));
+    return value;
+};
+
+var flat_top_window= function(step, points, a0, a1, a2, a3, a4) {
+    var a0= isNumeric(a0) ? a0 : 1;
+    var a1= isNumeric(a1) ? a1 : 1.93;
+    var a2= isNumeric(a2) ? a2 : 1.29;
+    var a3= isNumeric(a3) ? a3 : 0.388;
+    var a4= isNumeric(a4) ? a4 : 0.028;
+
+    var value=
+          a0
+        - a1 * Math.cos((2 * Math.PI * step) / (points - 1))
+        + a2 * Math.cos((4 * Math.PI * step) / (points - 1))
+        - a3 * Math.cos((6 * Math.PI * step) / (points - 1))
+        + a4 * Math.cos((8 * Math.PI * step) / (points - 1));
+
+    return value;
+};
+
 
 var functions= {
     dirichlet_window: dirichlet_window,
@@ -136,6 +168,8 @@ var functions= {
     blackman_harris_window: blackman_harris_window,
     gauss_window: gauss_window,
     kaiser_window: kaiser_window,
+    bartlett_window: bartlett_window,
+    flat_top_window: flat_top_window,
 };
 
 
@@ -146,7 +180,7 @@ var writeWindow= function(windowName, points) {
     }
 
     console.log('INFO: calculating ' + windowName + ', output to ../' + windowName + '.c');
-    var outputFile= '../' + windowName + '.c';
+    var outputFile= './' + windowName + '.c';
     fs.writeFileSync(outputFile, '#include <xc.h>\n#include <dsp.h>\n\n\n', 'utf8');
     fs.appendFileSync(outputFile, '__prog__ fractional ' + windowName + '[' + points + '] __attribute__((space(auto_psv))) = {\n', 'utf8');
     var line= '  ';

@@ -16,7 +16,9 @@ extern "C" {
 #include <dsp.h>
 
 
-//#define PI                  3.1428571428571428571428571428571
+#ifndef PI
+#define PI                  3.1428571428571428571428571428571
+#endif
 #define SINE_TABLE_TYPE     uint32_t
 #define SINE_POINTS         4096
 
@@ -26,7 +28,6 @@ extern volatile uint16_t last_dds_step_r;
 extern volatile uint16_t last_dds_step_l;
 
 
-//void sine_lookup_table_init();
 SINE_TABLE_TYPE get_sine_value(uint16_t index);
 void set_dds_step(uint8_t samplerate, float frequency_l, float frequency_r);
 void fill_sine_buffer(uint16_t *buffer, uint16_t len);
