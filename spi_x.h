@@ -27,12 +27,16 @@ extern "C" {
 //size for both channels
 #define     SPI_DA_BUFFER_SIZE      2048
 
-//size for both channels
+//size for both channels, must be 2 times fft window length
 #define     SPI_AD_BUFFER_SIZE      2048
 
 #define     INPUT_SAMPLERATE        192
 #define     OUTPUT_SAMPLERATE       48
 #define     SAMPLERATE_RATIO        INPUT_SAMPLERATE / OUTPUT_SAMPLERATE
+#define     BUFFER_RATIO            SPI_AD_BUFFER_SIZE / SPI_DA_BUFFER_SIZE
+#if         BUFFER_RATIO > SAMPLERATE_RATIO
+#warning    samplerate ratio larger than buffer ratio, samples will be lost while translating samplerates
+#endif
 
 
 #ifdef SPIBUF_IN_EDS
@@ -48,6 +52,8 @@ extern fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI
 #endif
 extern volatile bool spi_ad_buffer_full[2];
 extern volatile bool spi_da_buffer_empty[2];
+
+extern volatile uint64_t processing_time;
 
 void SPI1_init();
 void SPI2_init();

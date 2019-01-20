@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_harris_window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/flat_top_window.c dsp.c window_asm.S main.c
+SOURCEFILES_QUOTED_IF_SPACED=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_harris_window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/flat_top_window.c dsp.c window_asm.S main.c filter.S
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/dsp.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_x.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/timer_x.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/SSD1306/lcd.o.d ${OBJECTDIR}/spi_x.o.d ${OBJECTDIR}/sine.o.d ${OBJECTDIR}/qei_x.o.d ${OBJECTDIR}/cni.o.d ${OBJECTDIR}/buffer.o.d ${OBJECTDIR}/i2c_eep.o.d ${OBJECTDIR}/i2c_misc.o.d ${OBJECTDIR}/window.o.d ${OBJECTDIR}/window_functions/blackman_harris_window.o.d ${OBJECTDIR}/window_functions/blackman_window.o.d ${OBJECTDIR}/window_functions/dirichlet_window.o.d ${OBJECTDIR}/window_functions/gauss_window.o.d ${OBJECTDIR}/window_functions/hamming_window.o.d ${OBJECTDIR}/window_functions/kaiser_window.o.d ${OBJECTDIR}/window_functions/bartlett_window.o.d ${OBJECTDIR}/window_functions/flat_top_window.o.d ${OBJECTDIR}/dsp.o.d ${OBJECTDIR}/window_asm.o.d ${OBJECTDIR}/main.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/dsp.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/filter.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_x.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/timer_x.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/SSD1306/lcd.o.d ${OBJECTDIR}/spi_x.o.d ${OBJECTDIR}/sine.o.d ${OBJECTDIR}/qei_x.o.d ${OBJECTDIR}/cni.o.d ${OBJECTDIR}/buffer.o.d ${OBJECTDIR}/i2c_eep.o.d ${OBJECTDIR}/i2c_misc.o.d ${OBJECTDIR}/window.o.d ${OBJECTDIR}/window_functions/blackman_harris_window.o.d ${OBJECTDIR}/window_functions/blackman_window.o.d ${OBJECTDIR}/window_functions/dirichlet_window.o.d ${OBJECTDIR}/window_functions/gauss_window.o.d ${OBJECTDIR}/window_functions/hamming_window.o.d ${OBJECTDIR}/window_functions/kaiser_window.o.d ${OBJECTDIR}/window_functions/bartlett_window.o.d ${OBJECTDIR}/window_functions/flat_top_window.o.d ${OBJECTDIR}/dsp.o.d ${OBJECTDIR}/window_asm.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/filter.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/dsp.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o
+OBJECTFILES=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/dsp.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/filter.o
 
 # Source Files
-SOURCEFILES=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_harris_window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/flat_top_window.c dsp.c window_asm.S main.c
+SOURCEFILES=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_harris_window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/flat_top_window.c dsp.c window_asm.S main.c filter.S
 
 
 CFLAGS=
@@ -421,6 +421,13 @@ ${OBJECTDIR}/window_asm.o: window_asm.S  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_AS_PRE)  window_asm.S  -o ${OBJECTDIR}/window_asm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_asm.o.d"  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/window_asm.o.asm.d",--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-g,--relax,-alsi=${OBJECTDIR}/window_asm.lst$(MP_EXTRA_AS_POST)
 	@${FIXDEPS} "${OBJECTDIR}/window_asm.o.d" "${OBJECTDIR}/window_asm.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/filter.o: filter.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/filter.o.d 
+	@${RM} ${OBJECTDIR}/filter.o 
+	${MP_CC} $(MP_EXTRA_AS_PRE)  filter.S  -o ${OBJECTDIR}/filter.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/filter.o.d"  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/filter.o.asm.d",--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-g,--relax,-alsi=${OBJECTDIR}/filter.lst$(MP_EXTRA_AS_POST)
+	@${FIXDEPS} "${OBJECTDIR}/filter.o.d" "${OBJECTDIR}/filter.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/delay.o: delay.S  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -442,6 +449,13 @@ ${OBJECTDIR}/window_asm.o: window_asm.S  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/window_asm.o 
 	${MP_CC} $(MP_EXTRA_AS_PRE)  window_asm.S  -o ${OBJECTDIR}/window_asm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/window_asm.o.d"  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/window_asm.o.asm.d",--defsym=__MPLAB_BUILD=1,-g,--relax,-alsi=${OBJECTDIR}/window_asm.lst$(MP_EXTRA_AS_POST)
 	@${FIXDEPS} "${OBJECTDIR}/window_asm.o.d" "${OBJECTDIR}/window_asm.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/filter.o: filter.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/filter.o.d 
+	@${RM} ${OBJECTDIR}/filter.o 
+	${MP_CC} $(MP_EXTRA_AS_PRE)  filter.S  -o ${OBJECTDIR}/filter.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/filter.o.d"  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/filter.o.asm.d",--defsym=__MPLAB_BUILD=1,-g,--relax,-alsi=${OBJECTDIR}/filter.lst$(MP_EXTRA_AS_POST)
+	@${FIXDEPS} "${OBJECTDIR}/filter.o.d" "${OBJECTDIR}/filter.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
 	
 endif
 

@@ -10,18 +10,19 @@
 #include "sine.h"
 #include "SSD1306/lcd.h"
 #include "pps.h"
+#include "window.h"
+#include "buffer.h"
+#include "filter.h"
+#include "lp100_4taps_iir.h"
 
 
 
-uint8_t samplerate = 0;
-uint8_t words_per_sample = 0;
+const uint16_t spi_da_buffer_end = (uint16_t)&spi_da_buffer_0 + (SPI_DA_BUFFER_SIZE<<2);
 static uint16_t spi_da_dummy_read;
 static uint16_t spi_ad_command = 0b1101000000000000;
+fractional *spi_da_ptr = spi_da_buffer_0;
+volatile uint64_t processing_time = 0;
 
-
-//variables for samplerate test
-volatile static uint16_t frame_count = 0;
-volatile static uint64_t frames_end = 0;
 
 #ifdef SPIBUF_IN_EDS
 //buffer for A/D data in extended data space to save near memory
@@ -38,7 +39,6 @@ fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUF
 #endif
 volatile bool spi_ad_buffer_full[2] = { false, false };
 volatile bool spi_da_buffer_empty[2] = { true, true };
-
 
 #pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
 void SPI1_DMA0STA_set() {
@@ -254,13 +254,24 @@ void SPI2_init() {
 
 
 void __attribute__((__interrupt__, auto_psv)) _DMA2Interrupt(void) {
-    if (_PPST2 == 1) {
-        spi_ad_buffer_full[0] = true;
-    } else {
-        spi_ad_buffer_full[1] = true;
-    }
+    uint64_t start_processing_time = running_time();
 
     _DMA2IF = 0;
+    if (_PPST2 == 1) {
+        spi_ad_buffer_full[0] = true;
+        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, spi_ad_buffer_0);
+        //filter_iir(SPI_AD_BUFFER_SIZE, 0, spi_ad_buffer_0, lp100_4taps_coefficients, lp100_4taps_states);
+        convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_0);
+        spi_ad_buffer_full[0] = false;
+    } else {
+        spi_ad_buffer_full[1] = true;
+        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, spi_ad_buffer_1);
+        //filter_iir(SPI_AD_BUFFER_SIZE, 0, spi_ad_buffer_1, lp100_4taps_coefficients, lp100_4taps_states);
+        convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_1);
+        spi_ad_buffer_full[1] = false;
+    }
+
+    processing_time += running_time() - start_processing_time;
     return;
 }
 

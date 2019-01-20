@@ -50,6 +50,8 @@ __prog__ extern fractional bartlett_window[FFT_POINTS] __attribute__((space(auto
 __prog__ extern fractional flat_top_window[FFT_POINTS] __attribute__((space(auto_psv)));
 
 extern fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(0xc000)));
+extern fractional *window_fn_buffer_ptr;
+
 
 void setup_window_fn_buffer(__eds__ fractional *window_fn_buffer, __prog__ fractional *window_function_data);
 

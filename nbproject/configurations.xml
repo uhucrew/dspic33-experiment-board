@@ -23,6 +23,8 @@
       <itemPath>window.h</itemPath>
       <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/buffer.h</itemPath>
       <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/dsp.h</itemPath>
+      <itemPath>lp100_4taps_iir.h</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/filter.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -55,6 +57,7 @@
       <itemPath>dsp.c</itemPath>
       <itemPath>window_asm.S</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>filter.S</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -261,6 +264,7 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

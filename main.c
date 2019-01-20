@@ -63,54 +63,8 @@
 #include "buffer.h"
 
 
-uint64_t processing_time = 0;
-
 //working tasks timer interrupt, save psv and working registers
 void __attribute__((__interrupt__, auto_psv, shadow)) _T3Interrupt(void) {
-    uint64_t start_processing_time = running_time();
-//    static uint16_t i;
-//    static uint16_t da_ptr = 0;
-
-    //copy AD input buffer to output buffer
-    //convert samplerate and 16 bit input to 32(24) bit output
-    //sum up volume to be displayed in main loop
-    if (spi_ad_buffer_full[0]) {
-        //use half buffer size as number of points (for stereo)
-        //apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_0, spi_ad_buffer_0);
-        convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, spi_ad_buffer_0, spi_da_buffer_0);
-/*
-        for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i];
-            spi_da_buffer_0[da_ptr++] = 0;
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_0[i+1];
-            spi_da_buffer_0[da_ptr++] = 0;
-            if (da_ptr >= SPI_DA_BUFFER_SIZE<<1) {
-                da_ptr = 0;
-            }
-        }
-*/
-        spi_ad_buffer_full[0] = false;
-    }
-    if (spi_ad_buffer_full[1]) {
-        //use half buffer size as number of points (for stereo)
-        //apply_window(SPI_AD_BUFFER_SIZE>>1, spi_ad_buffer_1, spi_ad_buffer_1);
-        convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, spi_ad_buffer_1, spi_da_buffer_1);
-/*
-        for (i = 0; i < SPI_AD_BUFFER_SIZE; i += 2 * SAMPLERATE_RATIO) {
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i];
-            spi_da_buffer_0[da_ptr++] = 0;
-            spi_da_buffer_0[da_ptr++] = spi_ad_buffer_1[i+1];
-            spi_da_buffer_0[da_ptr++] = 0;
-            if (da_ptr >= SPI_DA_BUFFER_SIZE<<1) {
-                da_ptr = 0;
-            }
-        }
-*/
-        spi_ad_buffer_full[1] = false;
-    }
-
-    processing_time += running_time() - start_processing_time;
-    //clear interrupt flag
     _T3IF = 0;
 }
 
@@ -142,7 +96,7 @@ int main(int argc, char** argv) {
     SPI1_init();
     SPI2_init();
     //start timer for working tasks (check buffers and process data)
-    timer3_init();
+    //timer3_init();
 
 
 /*
