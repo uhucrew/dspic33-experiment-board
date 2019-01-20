@@ -14,7 +14,7 @@ extern "C" {
 
 #include    <dsp.h>
 
-void filter_iir(uint16_t length, uint16_t input32bit, fractional *buffer, const fractional *coefficients, fractional *states);
+void filter_iir(uint16_t length, uint16_t input32bit, uint16_t taps, fractional *buffer, fractional *states, const fractional *coefficients);
 
 #ifdef	__cplusplus
 }

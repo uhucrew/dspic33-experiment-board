@@ -260,13 +260,13 @@ void __attribute__((__interrupt__, auto_psv)) _DMA2Interrupt(void) {
     if (_PPST2 == 1) {
         spi_ad_buffer_full[0] = true;
         apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, spi_ad_buffer_0);
-        //filter_iir(SPI_AD_BUFFER_SIZE, 0, spi_ad_buffer_0, lp100_4taps_coefficients, lp100_4taps_states);
+        filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_0, lp100_4taps_states, lp100_4taps_coefficients);
         convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_0);
         spi_ad_buffer_full[0] = false;
     } else {
         spi_ad_buffer_full[1] = true;
         apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, spi_ad_buffer_1);
-        //filter_iir(SPI_AD_BUFFER_SIZE, 0, spi_ad_buffer_1, lp100_4taps_coefficients, lp100_4taps_states);
+        filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_1, lp100_4taps_states, lp100_4taps_coefficients);
         convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_1);
         spi_ad_buffer_full[1] = false;
     }

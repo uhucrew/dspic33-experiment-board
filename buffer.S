@@ -33,24 +33,18 @@ _convert_samplerate:
     MOV		_spi_da_ptr, W4			    //restore current output pointer
     MOV		_spi_da_buffer_end, W5		    //load buffer end address for compare
     DO		W0, convert_samplerate_end
-    //left high word
-    MOV		[W3++], [W4++]
-    //left low word
-    BTSC	W2, #0
+    MOV		[W3++], [W4++]			    //left high word
+    BTSC	W2, #0				    //left low word
     MOV		[W3++], [W4++]
     BTSS	W2, #0
     CLR		[W4++]
-    //right high word
-    MOV		[W3++], [W4++]
-    //right low word
-    BTSC	W2, #0
+    MOV		[W3++], [W4++]			    //right high word
+    BTSC	W2, #0				    //right low word
     MOV		[W3++], [W4++]
     BTSS	W2, #0
     CLR		[W4++]
-    //da buffer end reached?
-    CPSNE	W5, W4
-    //reset output buffer pointer
-    MOV		#_spi_da_buffer_0, W4
+    CPSNE	W5, W4				    //da buffer end reached?
+    MOV		#_spi_da_buffer_0, W4		    //reset output buffer pointer
 convert_samplerate_end:
     ADD		W1, W3, W3
     MOV		W4, _spi_da_ptr

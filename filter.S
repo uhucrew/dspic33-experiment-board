@@ -3,27 +3,32 @@
 
     .text
 
-    //void filter_iir(uint16_t length, uint16_t input32bit, fractional *buffer, const fractional *coefficients, fractional *states);
+    //void filter_iir(uint16_t length, uint16_t input32bit, uint16_t taps, fractional *buffer, fractional *states, const fractional *coefficients);
+    //W0: length
+    //W1: 0 = 16bit input, 1 = 32bit input
+    //W2: number of taps
+    //W3: pointer to samples buffer
+    //W4: pointer to states buffer
+    //W5: pointer to filter coefficients
     .global	_filter_iir
 _filter_iir:
-    PUSH	W4				    //save registers
-    PUSH	W5
-    PUSH	W8
+    PUSH	W8				    //save registers
     PUSH	W10
-    MOV		W3, W8				    //load pointers to working registers
-    MOV		W4, W10
-    CLR		A, [W8], W4, [W10], W5		    //clear ACC A and preload data from buffers
-    LSR		W0, W0				    //loop #points/2
-    SUB		#1, W0
-    DO		W0, filter_iir_end
-    //MPY		W4*W5, A, [W8]+=2, W4, [W10]+=2, W5 //multiply, preload and inc pointers
+filter_iir_loop:
+    MOV		W4, W8				    //load pointers to working registers
+    MOV		W5, W10
+    CLR		A, [W8], W6, [W10], W7		    //clear ACC A and preload data from buffers
+    ADD		W0, W3, W0			    //calculate end address
+    SUB		#1, W2				    //loop #taps
+    DO		W2, filter_iir_end
+    MPY		W6 * W7, A, [W8]+=2, W6, [W10]+=2, W7 //multiply, preload and inc pointers
     NOP
 filter_iir_end:
     NOP
+    CPSNE	W0, W3				    //da buffer end reached?
+    BRA		filter_iir_loop
     POP		W10				    //restore registers
     POP		W8
-    POP		W5
-    POP		W4
     RETURN
 /*
     lp100_4taps_coefficients
