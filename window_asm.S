@@ -22,8 +22,7 @@ _apply_window:
     DO		W0, apply_window_end
     MPY		W4 * W5, A, [W8]+=2, W4, [W10]+=2, W5	//multiply, preload and inc pointers
     MOV		ACCAH, W0				//save result
-    MOV		W0, [W2]
-    INC2	W2, W2					//inc result pointer
+    MOV		W0, [W2++]              //store and inc result pointer
     MPY		W4 * W5, A, [W8]+=2, W4, [W10], W5	//multiply, preload and inc pointers
     MOV		ACCAH, W0				//save result
 apply_window_end:
