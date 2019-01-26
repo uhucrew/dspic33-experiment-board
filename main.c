@@ -91,6 +91,7 @@ int main(int argc, char** argv) {
     set_dds_step(48, 55.0, 880.0);
 
     setup_window_fn_buffer(window_fn_buffer, dirichlet_window);
+    fft_init();
 
     //start AD/DA converter and read/send data continuously
     SPI1_init();
@@ -114,6 +115,7 @@ int main(int argc, char** argv) {
     static int32_t qei_diff, qei_last = 0, volume = 128, loop_count = 0;
     static bool menu_active = false;
     uint64_t last_running_time = running_time();
+
 
     set_volume(I2C_ADDR_MAX5387, volume);
     
@@ -159,6 +161,15 @@ int main(int argc, char** argv) {
         snprintf(lcd_string_buffer, sizeof(lcd_string_buffer), "pct cpu: %u", pctcpu);
         fb_draw_string (0, 2, empty_line);
         fb_draw_string (0, 2, lcd_string_buffer);
+
+        uint16_t i;
+        uint16_t l;
+        for (i = 0; i < FFT_NUM_BINS; i++) {
+            l = fft_bins[i];
+            if (l > 31) l = 31;
+            if (l == 0) continue;
+            fb_drawVLine(i, 63 - l, 63);
+        }
         fb_show();
 
         status = status ^ 1;

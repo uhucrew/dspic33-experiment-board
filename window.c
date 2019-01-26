@@ -5,7 +5,7 @@
 #include "window.h"
 
 
-fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(0xc000)));
+fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(YMEM_BASE + sizeof(fft_buffer))));
 
 
 void setup_window_fn_buffer(__eds__ fractional *window_fn_buffer, __prog__ fractional *window_function_data) {

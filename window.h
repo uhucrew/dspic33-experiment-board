@@ -15,12 +15,10 @@ extern "C" {
 #endif
 
 #include <dsp.h>
+#include "defines.h"
+#include "fft.h"
 #include "spi_x.h"
 
-
-//keep in sync with fft implementation
-//keep in sync with SPI_AD_BUFFER_SIZE/2
-#define FFT_POINTS              1024
 
 #define	DIRICHLET_WINDOW        0
 #define	HAMMING_WINDOW          1
@@ -49,7 +47,7 @@ __prog__ extern fractional kaiser_window[FFT_POINTS] __attribute__((space(auto_p
 __prog__ extern fractional bartlett_window[FFT_POINTS] __attribute__((space(auto_psv)));
 __prog__ extern fractional flat_top_window[FFT_POINTS] __attribute__((space(auto_psv)));
 
-extern fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(0xc000)));
+extern fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(YMEM_BASE + sizeof(fft_buffer))));
 extern fractional *window_fn_buffer_ptr;
 
 

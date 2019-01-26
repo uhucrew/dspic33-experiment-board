@@ -12,6 +12,53 @@ _buffer_copy:
     MOV		[W1++], [W2++]
     RETURN
 
+    //copy buffer to buffer, increment pointer by offset
+    //void buffer_copy_offset(uint16_t length, uint16_t offset, uint16_t *buffer, uint16_t *outbuffer);
+    .global	_buffer_copy_offset
+_buffer_copy_offset:
+    SUB		#1, W0
+  DO		W0, buffer_copy_offset_loop
+    MOV		[W2], [W3++]
+buffer_copy_offset_loop:
+    ADD		W1, W2, W2
+    RETURN
+
+    //copy buffer to buffer, increment pointer by offset
+    //void buffer_copy_offset(uint16_t length, uint16_t offset, uint16_t *buffer, uint16_t *outbuffer);
+    .global	_buffer_copy_offset_sum
+_buffer_copy_offset_sum:
+    PUSH	W4					//save registers
+    PUSH	W5
+    PUSH	W8
+    PUSH	W10
+    MOV		W2, W10
+    SUB		#1, W0
+  DO		W0, buffer_copy_offset_sum_loop
+    MOVSAC	A, [W8], W4, [W10], W5		//clear ACC A and preload data from buffers
+    MOV		W5, [W3++]
+buffer_copy_offset_sum_loop:
+    ADD		W1, W10, W10
+    POP		W10					//restore registers
+    POP		W8
+    POP		W5
+    POP		W4
+    RETURN
+
+
+    //copy ad buffer to fractcomplex buffer for fft
+    //void buffer_copy_offset(uint16_t length, fractional *buffer, fractcomplex *outbuffer);
+    .global	_buffer_copy_ad_fractcomplex
+_buffer_copy_ad_fractcomplex:
+    LSR		W0, W0
+    SUB		#1, W0
+  DO		W0, buffer_copy_ad_fractcomplex_loop
+    ASR		[W1], [W2++]
+    CLR		[W2++]
+buffer_copy_ad_fractcomplex_loop:
+    ADD		W1, #4, W1
+    RETURN
+
+
 
     //copy buffer to buffer
     //void convert_samplerate(uint16_t length, uint16_t samplerate_ratio, uint16_t input32bit, uint16_t *buffer);

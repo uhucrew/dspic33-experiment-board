@@ -14,6 +14,7 @@
 #include "buffer.h"
 #include "filter.h"
 #include "lp100_4taps_iir.h"
+#include "fft.h"
 
 
 
@@ -32,10 +33,10 @@ __eds__ fractional spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SP
 __eds__ fractional spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory),eds));
 __eds__ fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory),eds));
 #else
-fractional spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE)));
-fractional spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE)));
-fractional spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
-fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE)));
+fractional spi_ad_buffer_0[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
+fractional spi_ad_buffer_1[SPI_AD_BUFFER_SIZE] __attribute__((aligned(SPI_AD_BUFFER_SIZE),space(xmemory)));
+fractional spi_da_buffer_0[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
+fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUFFER_SIZE),space(xmemory)));
 #endif
 volatile bool spi_ad_buffer_full[2] = { false, false };
 volatile bool spi_da_buffer_empty[2] = { true, true };
@@ -223,7 +224,7 @@ void SPI2_init() {
     DMA2REQ = 0b0000000000100001;
     SPI2_DMA2STA_set();
     DMA2PAD = (uint16_t) &SPI2BUF;
-    _DMA2IP = 2;
+    _DMA2IP = 1;
     _DMA2IF = 0;
     _DMA2IE = 1;
 
@@ -255,19 +256,38 @@ void SPI2_init() {
 
 void __attribute__((__interrupt__, auto_psv)) _DMA2Interrupt(void) {
     uint64_t start_processing_time = running_time();
+    uint16_t i;
 
     _DMA2IF = 0;
     if (_PPST2 == 1) {
         spi_ad_buffer_full[0] = true;
-        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, spi_ad_buffer_0);
-        filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_0, lp100_4taps_states, lp100_4taps_coefficients);
         convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_0);
+        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, spi_ad_buffer_0);
+        //filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_0, lp100_4taps_states, lp100_4taps_coefficients);
+        //buffer_copy_ad_fractcomplex(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, fft_buffer);
+        for (i = 0; i < FFT_POINTS; i++) {
+            fft_buffer[i].real = spi_ad_buffer_0[i]>>1;
+            fft_buffer[i].imag = 0;
+        }
+
+        fft_compute();
+        //buffer_copy_offset_sum(FFT_NUM_BINS, FFT_POINTS / FFT_NUM_BINS, (fractional *)fft_buffer, (fractional *)fft_bin_buffer);
+        //fft_build_bins();
         spi_ad_buffer_full[0] = false;
     } else {
         spi_ad_buffer_full[1] = true;
-        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, spi_ad_buffer_1);
-        filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_1, lp100_4taps_states, lp100_4taps_coefficients);
         convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_1);
+        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, spi_ad_buffer_1);
+        //filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_1, lp100_4taps_states, lp100_4taps_coefficients);
+        //buffer_copy_ad_fractcomplex(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, fft_buffer);
+        for (i = 0; i < FFT_POINTS; i++) {
+            fft_buffer[i].real = spi_ad_buffer_1[i]>>1;
+            fft_buffer[i].imag = 0;
+        }
+
+        fft_compute();
+        //buffer_copy_offset_sum(FFT_NUM_BINS, FFT_POINTS / FFT_NUM_BINS, (fractional *)fft_buffer, (fractional *)fft_bin_buffer);
+        //fft_build_bins();
         spi_ad_buffer_full[1] = false;
     }
 

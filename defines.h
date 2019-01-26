@@ -10,6 +10,7 @@
 
 
 #ifdef __C30__
+    #define YMEM_BASE   0x9000              //base address of ymemory
     #define CRYSTAL     24576000            //crystal with 24.576 MHz
     #define PLLFBD_DEF  44                  //pll multiplier (M) 44 = *46
     #define PLLPRE_DEF  2                   //pll prescaler  (N2) 2 = /4

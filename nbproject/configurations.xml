@@ -23,7 +23,6 @@
       <itemPath>window.h</itemPath>
       <itemPath>lp100_4taps_iir.h</itemPath>
       <itemPath>buffer.h</itemPath>
-      <itemPath>dsp.h</itemPath>
       <itemPath>filter.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -46,18 +45,18 @@
       <itemPath>i2c_eep.c</itemPath>
       <itemPath>i2c_misc.c</itemPath>
       <itemPath>window.c</itemPath>
-      <itemPath>window_functions/blackman_harris_window.c</itemPath>
       <itemPath>window_functions/blackman_window.c</itemPath>
       <itemPath>window_functions/dirichlet_window.c</itemPath>
       <itemPath>window_functions/gauss_window.c</itemPath>
       <itemPath>window_functions/hamming_window.c</itemPath>
       <itemPath>window_functions/kaiser_window.c</itemPath>
-      <itemPath>window_functions/bartlett_window.c</itemPath>
-      <itemPath>window_functions/flat_top_window.c</itemPath>
-      <itemPath>dsp.c</itemPath>
       <itemPath>window_asm.S</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>filter.S</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/fft.c</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/window_functions/bartlett_window.c</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/window_functions/blackman_harris_window.c</itemPath>
+      <itemPath>/home/main/daten/ELEKTRO/bat-detector-2.0/window_functions/flat_top_window.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -79,7 +78,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.35</languageToolchainVersion>
+        <languageToolchainVersion>1.34</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
@@ -88,6 +87,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
+            <linkerLibFileItem>/opt/microchip/xc16/v1.34/lib/libdsp-elf.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -110,7 +110,7 @@
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
       <C30>
-        <property key="code-model" value="small-code"/>
+        <property key="code-model" value="large-code"/>
         <property key="const-model" value="const-in-code"/>
         <property key="data-model" value="large-data"/>
         <property key="disable-instruction-scheduling" value="false"/>
@@ -141,7 +141,7 @@
         <property key="oXC16gcc-sfr-warn" value="false"/>
         <property key="oXC16gcc-smar-io-lvl" value="1"/>
         <property key="oXC16gcc-smart-io-fmt" value=""/>
-        <property key="optimization-level" value="1"/>
+        <property key="optimization-level" value="0"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value=""/>
@@ -212,10 +212,10 @@
         <property key="secure-flash" value="no_flash"/>
         <property key="secure-ram" value="no_ram"/>
         <property key="secure-write-protect" value="no_write_protect"/>
-        <property key="stack-size" value="16"/>
+        <property key="stack-size" value="32"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
-        <property key="warn-section-align" value="false"/>
+        <property key="warn-section-align" value="true"/>
       </C30-LD>
       <C30Global>
         <property key="common-include-directories" value=""/>
@@ -264,7 +264,6 @@
         <property key="UART 1" value="true"/>
         <property key="UART 2" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
