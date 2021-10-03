@@ -1,4 +1,7 @@
 build/
 debug/
 dist/
+disassembly
 nbproject/private/
+window_functions/node_modules
+window_functions/package*

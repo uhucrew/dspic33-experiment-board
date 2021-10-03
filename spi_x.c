@@ -10,7 +10,6 @@
 #include "sine.h"
 #include "SSD1306/lcd.h"
 #include "pps.h"
-#include "window.h"
 #include "buffer.h"
 #include "filter.h"
 #include "lp100_4taps_iir.h"
@@ -18,11 +17,15 @@
 
 
 
-const uint16_t spi_da_buffer_end = (uint16_t)&spi_da_buffer_0 + (SPI_DA_BUFFER_SIZE<<2);
+const fractional *spi_da_buffer_end = (fractional *)((uint16_t)&spi_da_buffer_0 + (SPI_DA_BUFFER_SIZE<<2));
 static uint16_t spi_da_dummy_read;
 static uint16_t spi_ad_command = 0b1101000000000000;
 fractional *spi_da_ptr = spi_da_buffer_0;
 volatile uint64_t processing_time = 0;
+uint32_t phase_jump_mixer;
+
+bool mono = false;
+bool autoscale = true;
 
 
 #ifdef SPIBUF_IN_EDS
@@ -40,6 +43,10 @@ fractional spi_da_buffer_1[SPI_DA_BUFFER_SIZE] __attribute__((aligned(SPI_DA_BUF
 #endif
 volatile bool spi_ad_buffer_full[2] = { false, false };
 volatile bool spi_da_buffer_empty[2] = { true, true };
+fractional *spi_ad_buffers[2] = { spi_ad_buffer_0 , spi_ad_buffer_1 };
+fractional *spi_da_buffers[2] = { spi_da_buffer_0 , spi_da_buffer_1 };
+
+extern fractional fft_temp_buffer[FFT_POINTS] __attribute__((aligned(FFT_POINTS<<1),space(xmemory)));
 
 #pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
 void SPI1_DMA0STA_set() {
@@ -144,7 +151,7 @@ void __attribute__((__interrupt__, auto_psv)) _DMA1Interrupt(void) {
 
 volatile static uint32_t spi1_errors = 0;
 
-void __attribute__((interrupt, auto_psv)) _SPI1ErrInterrupt(void) {
+void __attribute__((__interrupt__, auto_psv)) _SPI1ErrInterrupt(void) {
     spi1_errors++;
     if (SPI1STATbits.SPIROV == 1) {
         SPI1STATbits.SPIROV = 0;
@@ -253,43 +260,91 @@ void SPI2_init() {
     _LATA1 = 0;
 }
 
-
 void __attribute__((__interrupt__, auto_psv)) _DMA2Interrupt(void) {
     uint64_t start_processing_time = running_time();
-    uint16_t i;
+    uint16_t slot;
+    fractional ad_max_value;
+    static fractional ad_max_value_last;
+    static fractional ad_max_factor;
+    int16_t max_value_index;
+    uint16_t DSRPAG_save;
+    fractional ifft_max_value;
+    static fractional ifft_max_value_last;
+    static fractional ifft_max_factor;
+
 
     _DMA2IF = 0;
     if (_PPST2 == 1) {
-        spi_ad_buffer_full[0] = true;
-        convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_0);
-        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, spi_ad_buffer_0);
-        //filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_0, lp100_4taps_states, lp100_4taps_coefficients);
-        //buffer_copy_ad_fractcomplex(SPI_AD_BUFFER_SIZE, spi_ad_buffer_0, fft_buffer);
-        for (i = 0; i < FFT_POINTS; i++) {
-            fft_buffer[i].real = spi_ad_buffer_0[i]>>1;
-            fft_buffer[i].imag = 0;
-        }
-
-        fft_compute();
-        //buffer_copy_offset_sum(FFT_NUM_BINS, FFT_POINTS / FFT_NUM_BINS, (fractional *)fft_buffer, (fractional *)fft_bin_buffer);
-        //fft_build_bins();
-        spi_ad_buffer_full[0] = false;
+        slot = 0;
     } else {
-        spi_ad_buffer_full[1] = true;
-        convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffer_1);
-        apply_window(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, spi_ad_buffer_1);
-        //filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffer_1, lp100_4taps_states, lp100_4taps_coefficients);
-        //buffer_copy_ad_fractcomplex(SPI_AD_BUFFER_SIZE, spi_ad_buffer_1, fft_buffer);
-        for (i = 0; i < FFT_POINTS; i++) {
-            fft_buffer[i].real = spi_ad_buffer_1[i]>>1;
-            fft_buffer[i].imag = 0;
+        slot = 1;
+    }
+
+    spi_ad_buffer_full[slot] = true;
+    //static uint32_t phase_accu = 0;
+    //buffer_put_sine_asm(SPI_AD_BUFFER_SIZE, spi_ad_buffers[slot], mono, &phase_jump_mixer, 0x7FFF, &phase_accu);
+    //buffer_multiply_sine_asm(SPI_AD_BUFFER_SIZE, spi_ad_buffers[slot], mono, &phase_jump_mixer, 0x7FFF, &phase_accu);
+    //filter_iir(SPI_AD_BUFFER_SIZE, 0, LP100_4TAPS_TAPS, spi_ad_buffers[slot], lp100_4taps_states, lp100_4taps_coefficients);
+
+    //convert_samplerate(SPI_AD_BUFFER_SIZE, SAMPLERATE_RATIO, 0, spi_ad_buffers[slot]);
+    buffer_copy_ad_fractional(FFT_POINTS, spi_ad_buffers[slot], fft_temp_buffer, mono);
+    if (autoscale) {
+        ad_max_value = VectorMax(FFT_POINTS, (fractional *)&fft_temp_buffer[0], &max_value_index);
+        if (ad_max_value > ad_max_value_last) {
+            ad_max_value_last += 1;
+        } else {
+            ad_max_value_last -= 1;
+        }
+        if (ad_max_value_last > 0x3FFF) {
+            ad_max_value_last = 0x3FFF;
+        }
+        if (ad_max_value_last < 0x80) {
+            ad_max_value_last = 0x80;
         }
 
-        fft_compute();
-        //buffer_copy_offset_sum(FFT_NUM_BINS, FFT_POINTS / FFT_NUM_BINS, (fractional *)fft_buffer, (fractional *)fft_bin_buffer);
-        //fft_build_bins();
-        spi_ad_buffer_full[1] = false;
+        //scaling target value for +/-1 is 0.000015258556 -> Q31 fract 0x00007fff +/-0.5 -> 7.6291617e-06
+        ad_max_factor = Float2Fract(7.6284e-06 / Fract2Float(ad_max_value_last));
+        scale_buffer(FFT_POINTS, &fft_temp_buffer[0], ad_max_factor);
     }
+  
+
+    fft_compute();
+    fft_build_bins();
+
+  DSRPAG_save = DSRPAG;
+    DSRPAG = 1;
+    ifft_fill_buffer(0);
+    //buffer_copy(IFFT_POINTS<<1, (fractional *)&fft_buffer[0], (fractional *)&ifft_buffer[0]);
+  DSRPAG = DSRPAG_save;
+
+    ifft_compute();
+
+    /*if (autoscale) {
+        ifft_max_value = VectorMax(IFFT_POINTS<<1, (fractional *)&ifft_buffer[0], &max_value_index);
+        if (ifft_max_value > ifft_max_value_last) {
+            ifft_max_value_last += 1;
+        } else {
+            ifft_max_value_last -= 1;
+        }
+        if (ifft_max_value_last > 0x3FFF) {
+            ifft_max_value_last = 0x3FFF;
+        }
+        if (ifft_max_value_last < 0x80) {
+            ifft_max_value_last = 0x80;
+        }
+
+        //scaling target value for +/-1 is 0.000015258556 -> Q31 fract 0x00007fff +/-0.5 -> 7.6291617e-06
+        ifft_max_factor = Float2Fract(7.6284e-06 / Fract2Float(ifft_max_value_last));
+        scale_buffer(IFFT_POINTS<<1, (fractional *)&ifft_buffer[0], ifft_max_factor);
+    }*/
+
+  DSRPAG_save = DSRPAG;
+    DSRPAG = 1;
+    //convert_samplerate(IFFT_POINTS<<1, 2, 1, (fractional *)&ifft_buffer[0]);
+    ifft_output_buffer();
+  DSRPAG = DSRPAG_save;
+
+    spi_ad_buffer_full[slot] = false;
 
     processing_time += running_time() - start_processing_time;
     return;
@@ -302,7 +357,7 @@ void __attribute__((__interrupt__, auto_psv)) _DMA3Interrupt(void) {
 
 volatile static uint32_t spi2_errors = 0;
 
-void __attribute__((interrupt, auto_psv)) _SPI2ErrInterrupt(void) {
+void __attribute__((__interrupt__, auto_psv)) _SPI2ErrInterrupt(void) {
     spi2_errors++;
     if (SPI2STATbits.SPIROV == 1) {
         SPI2STATbits.SPIROV = 0;

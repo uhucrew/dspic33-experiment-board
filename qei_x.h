@@ -14,6 +14,7 @@ extern "C" {
 
 
 extern uint32_t qei_cnt;
+extern uint8_t qei_push_cnt;
 void QEI_init();
 
 

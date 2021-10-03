@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/blackman_harris_window.c window_functions/flat_top_window.c window_asm.S main.c filter.S fft.c
+SOURCEFILES_QUOTED_IF_SPACED=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/blackman_harris_window.c window_functions/flat_top_window.c window_asm.S main.c filter.S fft.c display.c sine_asm.S
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/filter.o ${OBJECTDIR}/fft.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_x.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/timer_x.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/SSD1306/lcd.o.d ${OBJECTDIR}/spi_x.o.d ${OBJECTDIR}/sine.o.d ${OBJECTDIR}/qei_x.o.d ${OBJECTDIR}/cni.o.d ${OBJECTDIR}/buffer.o.d ${OBJECTDIR}/i2c_eep.o.d ${OBJECTDIR}/i2c_misc.o.d ${OBJECTDIR}/window.o.d ${OBJECTDIR}/window_functions/blackman_window.o.d ${OBJECTDIR}/window_functions/dirichlet_window.o.d ${OBJECTDIR}/window_functions/gauss_window.o.d ${OBJECTDIR}/window_functions/hamming_window.o.d ${OBJECTDIR}/window_functions/kaiser_window.o.d ${OBJECTDIR}/window_functions/bartlett_window.o.d ${OBJECTDIR}/window_functions/blackman_harris_window.o.d ${OBJECTDIR}/window_functions/flat_top_window.o.d ${OBJECTDIR}/window_asm.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/filter.o.d ${OBJECTDIR}/fft.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/filter.o ${OBJECTDIR}/fft.o ${OBJECTDIR}/display.o ${OBJECTDIR}/sine_asm.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_x.o.d ${OBJECTDIR}/delay.o.d ${OBJECTDIR}/timer_x.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/SSD1306/lcd.o.d ${OBJECTDIR}/spi_x.o.d ${OBJECTDIR}/sine.o.d ${OBJECTDIR}/qei_x.o.d ${OBJECTDIR}/cni.o.d ${OBJECTDIR}/buffer.o.d ${OBJECTDIR}/i2c_eep.o.d ${OBJECTDIR}/i2c_misc.o.d ${OBJECTDIR}/window.o.d ${OBJECTDIR}/window_functions/blackman_window.o.d ${OBJECTDIR}/window_functions/dirichlet_window.o.d ${OBJECTDIR}/window_functions/gauss_window.o.d ${OBJECTDIR}/window_functions/hamming_window.o.d ${OBJECTDIR}/window_functions/kaiser_window.o.d ${OBJECTDIR}/window_functions/bartlett_window.o.d ${OBJECTDIR}/window_functions/blackman_harris_window.o.d ${OBJECTDIR}/window_functions/flat_top_window.o.d ${OBJECTDIR}/window_asm.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/filter.o.d ${OBJECTDIR}/fft.o.d ${OBJECTDIR}/display.o.d ${OBJECTDIR}/sine_asm.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/filter.o ${OBJECTDIR}/fft.o
+OBJECTFILES=${OBJECTDIR}/i2c_x.o ${OBJECTDIR}/delay.o ${OBJECTDIR}/timer_x.o ${OBJECTDIR}/init.o ${OBJECTDIR}/SSD1306/lcd.o ${OBJECTDIR}/spi_x.o ${OBJECTDIR}/sine.o ${OBJECTDIR}/qei_x.o ${OBJECTDIR}/cni.o ${OBJECTDIR}/buffer.o ${OBJECTDIR}/i2c_eep.o ${OBJECTDIR}/i2c_misc.o ${OBJECTDIR}/window.o ${OBJECTDIR}/window_functions/blackman_window.o ${OBJECTDIR}/window_functions/dirichlet_window.o ${OBJECTDIR}/window_functions/gauss_window.o ${OBJECTDIR}/window_functions/hamming_window.o ${OBJECTDIR}/window_functions/kaiser_window.o ${OBJECTDIR}/window_functions/bartlett_window.o ${OBJECTDIR}/window_functions/blackman_harris_window.o ${OBJECTDIR}/window_functions/flat_top_window.o ${OBJECTDIR}/window_asm.o ${OBJECTDIR}/main.o ${OBJECTDIR}/filter.o ${OBJECTDIR}/fft.o ${OBJECTDIR}/display.o ${OBJECTDIR}/sine_asm.o
 
 # Source Files
-SOURCEFILES=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/blackman_harris_window.c window_functions/flat_top_window.c window_asm.S main.c filter.S fft.c
+SOURCEFILES=i2c_x.c delay.S timer_x.c init.c SSD1306/lcd.c spi_x.c sine.c qei_x.c cni.c buffer.S i2c_eep.c i2c_misc.c window.c window_functions/blackman_window.c window_functions/dirichlet_window.c window_functions/gauss_window.c window_functions/hamming_window.c window_functions/kaiser_window.c window_functions/bartlett_window.c window_functions/blackman_harris_window.c window_functions/flat_top_window.c window_asm.S main.c filter.S fft.c display.c sine_asm.S
 
 
 
@@ -242,6 +242,13 @@ ${OBJECTDIR}/fft.o: fft.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  fft.c  -o ${OBJECTDIR}/fft.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/fft.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -O0 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/fft.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/display.o: display.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/display.o.d 
+	@${RM} ${OBJECTDIR}/display.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  display.c  -o ${OBJECTDIR}/display.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/display.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -O0 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/display.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/i2c_x.o: i2c_x.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -390,6 +397,13 @@ ${OBJECTDIR}/fft.o: fft.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  fft.c  -o ${OBJECTDIR}/fft.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/fft.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -O0 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/fft.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/display.o: display.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/display.o.d 
+	@${RM} ${OBJECTDIR}/display.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  display.c  -o ${OBJECTDIR}/display.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/display.o.d"      -mno-eds-warn  -g -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -O0 -funroll-loops -fomit-frame-pointer -falign-arrays -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/display.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 endif
 
 # ------------------------------------------------------------------------------------
@@ -429,6 +443,13 @@ ${OBJECTDIR}/filter.o: filter.S  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_AS_PRE)  filter.S  -o ${OBJECTDIR}/filter.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/filter.o.d"  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/filter.o.asm.d",--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-g,--relax,-alsi=${OBJECTDIR}/filter.lst$(MP_EXTRA_AS_POST)  -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/filter.o.d" "${OBJECTDIR}/filter.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/sine_asm.o: sine_asm.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/sine_asm.o.d 
+	@${RM} ${OBJECTDIR}/sine_asm.o 
+	${MP_CC} $(MP_EXTRA_AS_PRE)  sine_asm.S  -o ${OBJECTDIR}/sine_asm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/sine_asm.o.d"  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/sine_asm.o.asm.d",--defsym=__MPLAB_BUILD=1,--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-g,--relax,-alsi=${OBJECTDIR}/sine_asm.lst$(MP_EXTRA_AS_POST)  -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/sine_asm.o.d" "${OBJECTDIR}/sine_asm.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/delay.o: delay.S  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -458,6 +479,13 @@ ${OBJECTDIR}/filter.o: filter.S  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_AS_PRE)  filter.S  -o ${OBJECTDIR}/filter.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/filter.o.d"  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/filter.o.asm.d",--defsym=__MPLAB_BUILD=1,-g,--relax,-alsi=${OBJECTDIR}/filter.lst$(MP_EXTRA_AS_POST)  -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/filter.o.d" "${OBJECTDIR}/filter.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/sine_asm.o: sine_asm.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/sine_asm.o.d 
+	@${RM} ${OBJECTDIR}/sine_asm.o 
+	${MP_CC} $(MP_EXTRA_AS_PRE)  sine_asm.S  -o ${OBJECTDIR}/sine_asm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/sine_asm.o.d"  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  -Wa,-MD,"${OBJECTDIR}/sine_asm.o.asm.d",--defsym=__MPLAB_BUILD=1,-g,--relax,-alsi=${OBJECTDIR}/sine_asm.lst$(MP_EXTRA_AS_POST)  -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/sine_asm.o.d" "${OBJECTDIR}/sine_asm.o.asm.d"  -t $(SILENT)  -rsi ${MP_CC_DIR}../  
+	
 endif
 
 # ------------------------------------------------------------------------------------
@@ -465,12 +493,12 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk  /opt/microchip/xc16/v1.41/lib/libdsp-elf.a  
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}    /opt/microchip/xc16/v1.41/lib/libdsp-elf.a  -mcpu=$(MP_PROCESSOR_OPTION)        -D__DEBUG=__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)   -mreserve=data@0x1000:0x101B -mreserve=data@0x101C:0x101D -mreserve=data@0x101E:0x101F -mreserve=data@0x1020:0x1021 -mreserve=data@0x1022:0x1023 -mreserve=data@0x1024:0x1027 -mreserve=data@0x1028:0x104F   -Wl,--local-stack,,--defsym=__MPLAB_BUILD=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D__DEBUG=__DEBUG,--defsym=__MPLAB_DEBUGGER_PK3=1,$(MP_LINKER_FILE_OPTION),--stack=32,--check-sections,--data-init,--pack-data,--handles,--isr,--gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--report-mem,--warn-section-align,--memorysummary,dist/${CND_CONF}/${IMAGE_TYPE}/memoryfile.xml$(MP_EXTRA_LD_POST)  -mdfp=${DFP_DIR}/xc16 
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}    /opt/microchip/xc16/v1.41/lib/libdsp-elf.a  -mcpu=$(MP_PROCESSOR_OPTION)        -D__DEBUG=__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)   -mreserve=data@0x1000:0x101B -mreserve=data@0x101C:0x101D -mreserve=data@0x101E:0x101F -mreserve=data@0x1020:0x1021 -mreserve=data@0x1022:0x1023 -mreserve=data@0x1024:0x1027 -mreserve=data@0x1028:0x104F   -Wl,--local-stack,,--defsym=__MPLAB_BUILD=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D__DEBUG=__DEBUG,--defsym=__MPLAB_DEBUGGER_PK3=1,$(MP_LINKER_FILE_OPTION),--stack=64,--check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--report-mem,--warn-section-align,--memorysummary,dist/${CND_CONF}/${IMAGE_TYPE}/memoryfile.xml$(MP_EXTRA_LD_POST)  -mdfp=${DFP_DIR}/xc16 
 	
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk  /opt/microchip/xc16/v1.41/lib/libdsp-elf.a 
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}    /opt/microchip/xc16/v1.41/lib/libdsp-elf.a  -mcpu=$(MP_PROCESSOR_OPTION)        -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -Wl,--local-stack,,--defsym=__MPLAB_BUILD=1,$(MP_LINKER_FILE_OPTION),--stack=32,--check-sections,--data-init,--pack-data,--handles,--isr,--gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--report-mem,--warn-section-align,--memorysummary,dist/${CND_CONF}/${IMAGE_TYPE}/memoryfile.xml$(MP_EXTRA_LD_POST)  -mdfp=${DFP_DIR}/xc16 
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -o dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}    /opt/microchip/xc16/v1.41/lib/libdsp-elf.a  -mcpu=$(MP_PROCESSOR_OPTION)        -omf=elf -save-temps=obj -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -Wl,--local-stack,,--defsym=__MPLAB_BUILD=1,$(MP_LINKER_FILE_OPTION),--stack=64,--check-sections,--data-init,--pack-data,--handles,--isr,--no-gc-sections,--fill-upper=0,--stackguard=16,--no-force-link,--smart-io,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--report-mem,--warn-section-align,--memorysummary,dist/${CND_CONF}/${IMAGE_TYPE}/memoryfile.xml$(MP_EXTRA_LD_POST)  -mdfp=${DFP_DIR}/xc16 
 	${MP_CC_DIR}/xc16-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/bat-detector-2.0.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -a  -omf=elf   -mdfp=${DFP_DIR}/xc16 
 	
 endif

@@ -9,7 +9,7 @@ var fftHeader= '../window.h';
 
 
 var windowFunctions= [];
-var fftPoints= 512;
+var fftPoints= 1024;
 var dataType= 'uint16_t';
 var dataSize= 16;
 var dataFactor= 1<<(dataSize - 1);
@@ -182,7 +182,7 @@ var writeWindow= function(windowName, points) {
     console.log('INFO: calculating ' + windowName + ', output to ../' + windowName + '.c');
     var outputFile= './' + windowName + '.c';
     fs.writeFileSync(outputFile, '#include <xc.h>\n#include <dsp.h>\n\n\n', 'utf8');
-    fs.appendFileSync(outputFile, '__prog__ fractional ' + windowName + '[' + points + '] __attribute__((space(auto_psv))) = {\n', 'utf8');
+    fs.appendFileSync(outputFile, '__prog__ fractional ' + windowName + '[' + points + '] __attribute__((space(prog))) = {\n', 'utf8');
     var line= '  ';
     for (var i= 0; i < points; i++) {
         var value= functions[windowName](i, points);

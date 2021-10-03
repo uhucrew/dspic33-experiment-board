@@ -48,33 +48,29 @@
 #define SSD1306_BUFFERSIZE (SSD1306_WIDTH*SSD1306_HEIGHT)/8
 
 /*******************************************************************************
- * Bekanntmachen globaler Variablen
- */
-
-extern uint8_t buffer[1024];
-extern char lcd_string_buffer[256];
-
-/*******************************************************************************
  * Prototypen
  */
 
 void lcd_init(void);
-void lcd_sendFramebuffer(uint8_t *buffer);
+void lcd_send_framebuffer(uint8_t *buffer);
 void lcd_invert(uint8_t inverted);
-void lcd_sendCommand(uint8_t command);
-void lcd_sendData(uint8_t data);
+void lcd_send_command(uint8_t command);
+void lcd_send_data(uint8_t data);
 
-void fb_drawPixel(uint8_t pos_x, uint8_t pos_y, uint8_t pixel_status);
-void fb_drawVLine(uint8_t x, uint8_t y, uint8_t length);
-void fb_drawHLine(uint8_t x, uint8_t y, uint8_t length);
-void fb_drawRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t fill);
+void fb_draw_pixel(uint8_t pos_x, uint8_t pos_y, uint8_t pixel_status);
+void fb_draw_v_line(uint8_t x, uint8_t y, uint8_t length, uint8_t pixel_status);
+void fb_draw_h_line(uint8_t x, uint8_t y, uint8_t length, uint8_t pixel_status);
+void fb_draw_rectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t fill);
+void fb_clear_rectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
 void fb_clear();
+void fb_clear_line(uint8_t line);
+void fb_clear_line_part(uint8_t line, uint8_t start_x, uint8_t end_x);
 void fb_invert(uint8_t status);
 void fb_show();
 void fb_show_bmp(uint8_t *pBmp);
 void fb_draw_char (uint16_t x, uint16_t y, uint16_t fIndex);
-void fb_draw_string (uint16_t x, uint16_t y, const char *pS);
+void fb_draw_string (uint16_t x, uint16_t y, const char *s);
 
-void fb_draw_string_big (uint16_t x, uint16_t y, const char *pS);
+void fb_draw_string_big (uint16_t x, uint16_t y, const char *s);
 
 #endif	/* LCD_H */

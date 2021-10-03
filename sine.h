@@ -8,29 +8,38 @@
 #ifndef SINE_H
 #define	SINE_H
 
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
 
+#include <stdbool.h>
 #include <dsp.h>
+#include "defines.h"
 
 
 #ifndef PI
-#define PI                  3.1428571428571428571428571428571
+#define PI                      3.1428571428571428571428571428571
 #endif
-#define SINE_TABLE_TYPE     uint32_t
-#define SINE_POINTS         4096
 
-__prog__ extern SINE_TABLE_TYPE sine_table[SINE_POINTS] __attribute__((space(auto_psv)));
+#define SINE_TABLE_TYPE         fractional
+#define SINE_POINTS             2048
+#define SINE_POINTS_2N          11
+#define PHASE_ACCU_SHIFT        (32 - SINE_POINTS_2N)
+#define PHASE_ACCU_SHIFT_HIGH   (16 - SINE_POINTS_2N)
 
-extern volatile uint16_t last_dds_step_r;
-extern volatile uint16_t last_dds_step_l;
+#define MIXER_FACTOR            500
 
+__eds__ extern SINE_TABLE_TYPE sine_table[SINE_POINTS] __attribute__((aligned(SINE_POINTS<<1),space(ymemory),eds,address(YMEM_BASE_SINE)));
 
-SINE_TABLE_TYPE get_sine_value(uint16_t index);
-void set_dds_step(uint8_t samplerate, float frequency_l, float frequency_r);
-void fill_sine_buffer(uint16_t *buffer, uint16_t len);
+void sine_lookup_table_init();
+uint32_t calculate_phase_jump(uint32_t frequency, bool mono);
+
+void buffer_add_sine(uint16_t len, fractional *buffer, bool mono, uint32_t *phase_jump, fractional scale, uint32_t *phase_accu);
+void buffer_put_sine(uint16_t len, fractional *buffer, bool mono, uint32_t *phase_jump, fractional scale, uint32_t *phase_accu);
+void buffer_multiply_sine(uint16_t len, fractional *buffer, bool mono, uint32_t *phase_jump, fractional scale, uint32_t *phase_accu);
+void buffer_multiply_sine_asm(uint16_t len, fractional *buffer, bool mono, uint32_t *phase_jump, fractional scale, uint32_t *phase_accu);
 
 
 
@@ -39,4 +48,3 @@ void fill_sine_buffer(uint16_t *buffer, uint16_t len);
 #endif
 
 #endif	/* SINE_H */
-

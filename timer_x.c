@@ -97,6 +97,11 @@ uint64_t running_time() {
            + timer_ms_rtc;
 }
 
+//ms timer counter
+uint32_t timer_ms_counter() {
+    return timer_ms;
+}
+
 //do not optimize delay functions
 #pragma GCC optimize ("O0")
 bool wait_us_for_register_bits(volatile uint16_t *reg, uint16_t bitmask, bool desired_state, uint32_t max_wait_us) {

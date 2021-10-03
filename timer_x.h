@@ -23,6 +23,7 @@ void timer1_init();
 void timer2_init();
 void timer3_init();
 uint64_t running_time();
+uint32_t timer_ms_counter();
 bool wait_us_for_register_bits(volatile uint16_t *reg, uint16_t bitmask, bool desired_state, uint32_t max_wait_us);
 void timer_delay_us(uint32_t us);
 void timer_delay_ms(uint32_t ms);

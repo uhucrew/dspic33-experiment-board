@@ -8,17 +8,20 @@
 #ifndef DEFINES_H
 #define	DEFINES_H
 
-
 #ifdef __C30__
-    #define YMEM_BASE   0x9000              //base address of ymemory
-    #define CRYSTAL     24576000            //crystal with 24.576 MHz
-    #define PLLFBD_DEF  44                  //pll multiplier (M) 44 = *46
-    #define PLLPRE_DEF  2                   //pll prescaler  (N2) 2 = /4
-    #define PLLPOST_DEF 0                   //pll postscaler (N1) 0 = /2
-    #define FOSC        CRYSTAL / (PLLPRE_DEF + 2) * (PLLFBD_DEF + 2) / (PLLPOST_DEF + 2)
-    #define FCY         FOSC / 2
-    #define I2CBAUD     800000
-    #define I2CBRG_DEF  ((uint16_t)((16.0 / (double)I2CBAUD - 16.0 * 120E-09) * FCY) >> 4) - 2
+    #define YMEM_BASE_FFT   0x9000              //base address of ymemory
+    #define YMEM_BASE_SINE  0xA000              //base address of ymemory
+    #define YMEM_BASE_WIN   0xB000              //base address of ymemory
+    #define YMEM_BASE_IFFT  0xB800              //base address of ymemory
+    #define YMEM_BASE_IIR   0xBC00              //base address of ymemory
+    #define CRYSTAL         24576000            //crystal with 24.576 MHz
+    #define PLLFBD_DEF      44                  //pll multiplier (M) 44 = *46
+    #define PLLPRE_DEF      2                   //pll prescaler  (N2) 2 = /4
+    #define PLLPOST_DEF     0                   //pll postscaler (N1) 0 = /2
+    #define FOSC            CRYSTAL / (PLLPRE_DEF + 2) * (PLLFBD_DEF + 2) / (PLLPOST_DEF + 2)
+    #define FCY             FOSC / 2
+    #define I2CBAUD         800000
+    #define I2CBRG_DEF      ((uint16_t)((16.0 / (double)I2CBAUD - 16.0 * 120E-09) * FCY) >> 4) - 2
 #else
     .equ CRYSTAL,       24576000            ;crystal with 24.576 MHz
     .equ PLLFBD_DEF,    44                  ;pll multiplier (M) 44 = *46

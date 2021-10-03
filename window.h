@@ -31,23 +31,19 @@ extern "C" {
 
 
 
-#ifdef SPIBUF_IN_EDS
-//FIXME: fix function to work with __eds__ buffers
-void apply_window(uint16_t points, __eds__ fractional *buffer, __eds__ fractional *outbuffer);
-#else
-void apply_window(uint16_t points, fractional *buffer, fractional *outbuffer);
-#endif
+void apply_window(uint16_t points, fractional *buffer, __eds__ fractcomplex *outbuffer);
 
-__prog__ extern fractional dirichlet_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional hamming_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional blackman_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional blackman_harris_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional gauss_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional kaiser_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional bartlett_window[FFT_POINTS] __attribute__((space(auto_psv)));
-__prog__ extern fractional flat_top_window[FFT_POINTS] __attribute__((space(auto_psv)));
 
-extern fractional window_fn_buffer[FFT_POINTS] __attribute__((space(ymemory),address(YMEM_BASE + sizeof(fft_buffer))));
+__prog__ extern fractional dirichlet_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional hamming_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional blackman_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional blackman_harris_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional gauss_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional kaiser_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional bartlett_window[FFT_POINTS] __attribute__((space(prog)));
+__prog__ extern fractional flat_top_window[FFT_POINTS] __attribute__((space(prog)));
+
+extern fractional window_fn_buffer[FFT_POINTS] __attribute__((aligned(FFT_POINTS<<1),space(ymemory),address(YMEM_BASE_WIN)));
 extern fractional *window_fn_buffer_ptr;
 
 

@@ -3,10 +3,13 @@
 #include <p33EP512MC202.h>
 
 #include "cni.h"
+#include "timer_x.h"
 
 
+static const uint8_t debounce_delay = 100;
 volatile static uint16_t cna_last = 0;
-volatile static uint16_t cnb_last = 0;
+volatile static uint16_t cnb_last = 0x2000;
+volatile static uint32_t rb13_cn_timer_last = 0;
 
 
 uint16_t empty_fn() {
@@ -31,7 +34,7 @@ uint16_t (*ra00_cn_fn)() = &empty_fn;
 //uint16_t (*ra14_cn_fn)() = empty_fn;
 //uint16_t (*ra15_cn_fn)() = empty_fn;
 
-uint16_t (*rb00_cn_fn)() = &empty_fn;
+//uint16_t (*rb00_cn_fn)() = &empty_fn;
 //uint16_t (*rb01_cn_fn)() = empty_fn;
 //uint16_t (*rb02_cn_fn)() = empty_fn;
 //uint16_t (*rb03_cn_fn)() = empty_fn;
@@ -44,7 +47,7 @@ uint16_t (*rb00_cn_fn)() = &empty_fn;
 //uint16_t (*rb10_cn_fn)() = empty_fn;
 //uint16_t (*rb11_cn_fn)() = empty_fn;
 //uint16_t (*rb12_cn_fn)() = empty_fn;
-uint16_t (*rb13_cn_fn)() = empty_fn;
+uint16_t (*rb13_cn_fn)() = &empty_fn;
 //uint16_t (*rb14_cn_fn)() = empty_fn;
 //uint16_t (*rb15_cn_fn)() = empty_fn;
 
@@ -114,10 +117,10 @@ void __attribute__((__interrupt__, auto_psv)) _CNInterrupt(void)
         cnb_last = portb_x;
 
         //RBXX CN interrupt routines
+/*
         if (cnb_change & 0x0001) {
             (*rb00_cn_fn)();
         }
-/*
         if (cnb_change & 0x0002) {
             (*rb01_cn_fn)();
         }
@@ -155,8 +158,11 @@ void __attribute__((__interrupt__, auto_psv)) _CNInterrupt(void)
             (*rb12_cn_fn)();
         }
 */
-         if (cnb_change & 0x2000) {
-            (*rb13_cn_fn)();
+        if (timer_ms_counter() - rb13_cn_timer_last > debounce_delay) {
+            rb13_cn_timer_last = timer_ms_counter();
+            if ((cnb_change & 0x2000) && (portb_x & 0x2000) == 0) {
+                (*rb13_cn_fn)();
+            }
         }
 /*
         if (cnb_change & 0x4000) {

@@ -20,7 +20,7 @@ extern "C" {
 
 #define LP100_4TAPS_TAPS    4
 
-const fractional lp100_4taps_coefficients[LP100_4TAPS_TAPS * 5] __attribute__((space(ymemory),address(YMEM_BASE + sizeof(fft_buffer) + sizeof(window_fn_buffer)))) = {
+const fractional lp100_4taps_coefficients[LP100_4TAPS_TAPS * 5] __attribute__((space(ymemory),address(YMEM_BASE_IIR))) = {
 	Q15(1.7035720716E-03),      	//b0
     Q15(3.4071441431E-03),          //b1
     Q15(1.8378208097E+00 / 2),      //-a1

@@ -10,7 +10,6 @@
       <itemPath>delay.h</itemPath>
       <itemPath>timer_x.h</itemPath>
       <itemPath>init.h</itemPath>
-      <itemPath>SSD1306/bmp.h</itemPath>
       <itemPath>SSD1306/font.h</itemPath>
       <itemPath>SSD1306/lcd.h</itemPath>
       <itemPath>spi_x.h</itemPath>
@@ -24,6 +23,7 @@
       <itemPath>lp100_4taps_iir.h</itemPath>
       <itemPath>buffer.h</itemPath>
       <itemPath>filter.h</itemPath>
+      <itemPath>display.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -57,6 +57,8 @@
       <itemPath>main.c</itemPath>
       <itemPath>filter.S</itemPath>
       <itemPath>fft.c</itemPath>
+      <itemPath>display.c</itemPath>
+      <itemPath>sine_asm.S</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -209,13 +211,13 @@
         <property key="oXC16ld-nostdlib" value="false"/>
         <property key="oXC16ld-stackguard" value="16"/>
         <property key="preprocessor-macros" value=""/>
-        <property key="remove-unused-sections" value="true"/>
+        <property key="remove-unused-sections" value="false"/>
         <property key="report-memory-usage" value="true"/>
         <property key="secure-eeprom" value="no_eeprom"/>
         <property key="secure-flash" value="no_flash"/>
         <property key="secure-ram" value="no_ram"/>
         <property key="secure-write-protect" value="no_write_protect"/>
-        <property key="stack-size" value="32"/>
+        <property key="stack-size" value="64"/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="true"/>
